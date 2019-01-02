@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee">
+    <managed-bean>
+          <description>Session Bean</description>
+          <managed-bean-name>sessionUser</managed-bean-name>
+          <managed-bean-class>view.managed.SessionBean</managed-bean-class>
+          <managed-bean-scope>session</managed-bean-scope>      
+    </managed-bean>	
+
+    <managed-bean>
+          <description>User Info</description>
+          <managed-bean-name>UserInfo</managed-bean-name>
+          <managed-bean-class>view.managed.UserInfo</managed-bean-class>
+          <managed-bean-scope>session</managed-bean-scope>
+          <managed-property>
+           <property-name>session</property-name>
+           <value>#{sessionUser}</value>
+          </managed-property>
+    </managed-bean>    
+
+    <managed-bean>
+          <description>Page Info</description>
+          <managed-bean-name>PageBean</managed-bean-name>
+          <managed-bean-class>view.managed.PageBean</managed-bean-class>
+          <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>    
+
+     <managed-bean>
+      <managed-bean-name>editarNoticiasBean</managed-bean-name>
+      <managed-bean-class>view.managed.EditarNoticiaBean</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+     </managed-bean>
+
+     <managed-bean>
+      <managed-bean-name>partidasBean</managed-bean-name>
+      <managed-bean-class>view.managed.PartidasBean</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+     </managed-bean>
+
+     <managed-bean>
+      <managed-bean-name>detalleTorneoBean</managed-bean-name>
+      <managed-bean-class>view.managed.DetalleTorneoBean</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+       <property-name>session</property-name>
+       <value>#{sessionUser}</value>
+      </managed-property>     
+     </managed-bean>
+
+     <managed-bean>
+      <managed-bean-name>editarTorneoBean</managed-bean-name>
+      <managed-bean-class>view.managed.EditarTorneoBean</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+     </managed-bean>
+
+
+    <managed-bean>
+      <managed-bean-name>backingMain</managed-bean-name>
+      <managed-bean-class>view.backing.Main</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+      <managed-property>
+       <property-name>session</property-name>
+       <value>#{sessionUser}</value>
+      </managed-property>
+      <managed-property>
+       <property-name>userInfo</property-name>
+       <value>#{UserInfo}</value>
+      </managed-property>
+    </managed-bean>
+ 
+     <managed-bean>
+      <managed-bean-name>backingNoticia</managed-bean-name>
+      <managed-bean-class>view.backing.Noticia</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+      <managed-property>
+       <property-name>session</property-name>
+       <value>#{sessionUser}</value>
+      </managed-property>
+      <managed-property>
+       <property-name>pageBean</property-name>
+       <value>#{PageBean}</value>
+      </managed-property>      
+    </managed-bean>
+    
+     <managed-bean>
+      <managed-bean-name>backingGestionarNoticias</managed-bean-name>
+      <managed-bean-class>view.backing.GestionarNoticias</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+      <managed-property>
+       <property-name>session</property-name>
+       <value>#{sessionUser}</value>
+      </managed-property>
+      <managed-property>
+       <property-name>userInfo</property-name>
+       <value>#{UserInfo}</value>
+      </managed-property>
+      <managed-property>
+        <property-name>editarNoticiasBean</property-name>
+        <value>#{editarNoticiasBean}</value>
+      </managed-property>      
+    </managed-bean>
+ 
+ <navigation-rule>
+    <from-view-id>/main.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>noticia</from-outcome>
+      <to-view-id>/noticia.jsf</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <navigation-case>
+   <from-outcome>main</from-outcome>
+   <to-view-id>/main.jsf</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_nosotros</managed-bean-name>
+  <managed-bean-class>view.backing.Nosotros</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <!--oracle-jdev-comment:managed-bean-jsp-link:1nosotros.jsf-->
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_cronograma</managed-bean-name>
+  <managed-bean-class>view.backing.Cronograma</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <value>#{sessionUser}</value>
+  </managed-property>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_partidas</managed-bean-name>
+  <managed-bean-class>view.backing.Partidas</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <value>#{sessionUser}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>userInfo</property-name>
+   <value>#{UserInfo}</value>
+  </managed-property>
+  <managed-property>
+    <property-name>partidasBean</property-name>
+    <value>#{partidasBean}</value>
+  </managed-property>        
+  <!--oracle-jdev-comment:managed-bean-jsp-link:1partidas.jsf-->
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_torneos</managed-bean-name>
+  <managed-bean-class>view.backing.Torneos</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+    <property-name>session</property-name>
+    <value>#{sessionUser}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>userInfo</property-name>
+   <value>#{UserInfo}</value>
+  </managed-property>  
+  <managed-property>
+    <property-name>detalleTorneoBean</property-name>
+    <value>#{detalleTorneoBean}</value>
+ </managed-property>
+  <managed-property>
+    <property-name>editarTorneoBean</property-name>
+    <value>#{editarTorneoBean}</value>
+ </managed-property>  
+ 
+ </managed-bean>
+ 
+ 
+ <managed-bean>
+  <managed-bean-name>backing_ranking</managed-bean-name>
+  <managed-bean-class>view.backing.Ranking</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+    <property-name>session</property-name>
+    <value>#{sessionUser}</value>
+  </managed-property>    
+  <!--oracle-jdev-comment:managed-bean-jsp-link:1ranking.jsf-->
+  <managed-property>
+   <property-name>bean</property-name>
+   <value>#{rankingBean}</value>
+  </managed-property>
+ </managed-bean>
+
+ <managed-bean>
+      <managed-bean-name>rankingSortingBean</managed-bean-name>
+      <managed-bean-class>view.managed.sorting.RankingSortingBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>      
+ </managed-bean>	
+
+ <managed-bean>
+  <managed-bean-name>backing_contacto</managed-bean-name>
+  <managed-bean-class>view.backing.Contacto</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <!--oracle-jdev-comment:managed-bean-jsp-link:1contacto.jsf-->
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_editarNoticia</managed-bean-name>
+  <managed-bean-class>view.backing.EditarNoticia</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+    <property-name>session</property-name>
+    <value>#{sessionUser}</value>
+  </managed-property>
+  <managed-property>
+    <property-name>userInfo</property-name>
+    <value>#{UserInfo}</value>
+  </managed-property>
+  <managed-property>
+    <property-name>editarNoticiasBean</property-name>
+    <value>#{editarNoticiasBean}</value>
+ </managed-property>
+ </managed-bean>
+
+ <managed-bean>
+  <managed-bean-name>backing_detalleTorneo</managed-bean-name>
+  <managed-bean-class>view.backing.DetalleTorneo</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+    <property-name>session</property-name>
+    <value>#{sessionUser}</value>
+  </managed-property>
+  <managed-property>
+    <property-name>detalleTorneoBean</property-name>
+    <value>#{detalleTorneoBean}</value>
+ </managed-property>
+ </managed-bean>
+
+ <managed-bean>
+  <managed-bean-name>backing_editarTorneo</managed-bean-name>
+  <managed-bean-class>view.backing.EditarTorneo</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+    <property-name>session</property-name>
+    <value>#{sessionUser}</value>
+  </managed-property>
+  <managed-property>
+    <property-name>editarTorneoBean</property-name>
+    <value>#{editarTorneoBean}</value>
+ </managed-property>  
+ </managed-bean>
+
+
+ <navigation-rule>
+  <from-view-id>/gestionarNoticias.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>editar</from-outcome>
+   <to-view-id>/editarNoticia.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+
+ <navigation-rule>
+  <from-view-id>/torneos.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>detalleTorneo</from-outcome>
+   <to-view-id>/detalleTorneo.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>editar</from-outcome>
+   <to-view-id>/editarTorneo.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+
+ <navigation-rule>
+  <from-view-id>/editarTorneo.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>volver</from-outcome>
+   <to-view-id>/torneos.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_socios</managed-bean-name>
+  <managed-bean-class>view.backing.Socios</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <!--oracle-jdev-comment:managed-bean-jsp-link:1socios.jsf-->
+ </managed-bean>
+ 
+ <navigation-rule>
+  <from-view-id>/detalleTorneo.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>volver</from-outcome>
+   <to-view-id>/torneos.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/editarNoticia.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>volver</from-outcome>
+   <to-view-id>/gestionarNoticias.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <managed-bean>
+  <managed-bean-name>backing_grau</managed-bean-name>
+  <managed-bean-class>view.backing.Grau</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <!--oracle-jdev-comment:managed-bean-jsp-link:1grau.jsf-->
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>backing_editarTorneoLateral</managed-bean-name>
+  <managed-bean-class>view.backing.EditarTorneoLateral</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+    <property-name>session</property-name>
+    <value>#{sessionUser}</value>
+  </managed-property>
+  <managed-property>
+    <property-name>editarTorneoBean</property-name>
+    <value>#{editarTorneoBean}</value>
+ </managed-property>  
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>gestionarArchivosBean</managed-bean-name>
+  <managed-bean-class>view.managed.GestionarArchivosBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+
+ <managed-bean>
+  <managed-bean-name>backing_gestionarArchivos</managed-bean-name>
+  <managed-bean-class>view.backing.GestionarArchivos</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+    <property-name>gestionarArchivosBean</property-name>
+    <value>#{gestionarArchivosBean}</value>
+ </managed-property>    
+ </managed-bean>
+
+     <converter>
+        <converter-id>CalDateStrConveter </converter-id>
+        <converter-class>view.util.CalDateStrConveter</converter-class>
+     </converter>
+ <managed-bean>
+  <managed-bean-name>rankingBean</managed-bean-name>
+  <managed-bean-class>view.managed.RankingBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+</faces-config>

@@ -1,0 +1,520 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<table xmlns="http://xmlns.oracle.com/jdeveloper/1112/offlinedb">
+  <ID class="oracle.javatools.db.IdentifierBasedID">
+    <identifier class="java.lang.String">b8bf8bb3-f795-44a0-b45f-7da9602ee127</identifier>
+  </ID>
+  <name>menu</name>
+  <columns>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">c6aade9b-54a0-433d-81dc-901e465b08f5</identifier>
+      </ID>
+      <name>mnu_id</name>
+      <dataTypeUsage>
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">b173bb01-a980-4b64-a5e4-df3d55cbdcaf</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>mnu_id</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>menu</name>
+                  <schemaName>clublyf</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_id</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">6cc43c84-1514-4e5a-830e-82836ff55f58</identifier>
+      </ID>
+      <name>mnu_padre</name>
+      <dataTypeUsage>
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">86257a75-e407-495e-8dbd-f0bf1318c58d</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">10</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>INT</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>mnu_padre</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>menu</name>
+                  <schemaName>clublyf</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_padre</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">105dc3a7-b088-44c3-b1d5-e2023f1c7548</identifier>
+      </ID>
+      <name>mnu_display</name>
+      <dataTypeUsage>
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">ec39bf07-2dcc-4c5d-aa70-a676cb84f50c</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">40</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>VARCHAR</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>mnu_display</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>menu</name>
+                  <schemaName>clublyf</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_display</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">3febed60-1ddd-4b8f-9dcc-df4604b4f378</identifier>
+      </ID>
+      <name>mnu_descripcion</name>
+      <dataTypeUsage>
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">fa4b6054-1448-493a-a581-0f41da66c3ec</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">200</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.mysql.MySQLDatabaseImpl</providerClass>
+          <typeName>VARCHAR</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>mnu_descripcion</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>menu</name>
+                  <schemaName>clublyf</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_descripcion</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+  </columns>
+  <indexes>
+    <indexe>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">95538c76-b6d8-4efd-bd5b-b4f809dc97af</identifier>
+      </ID>
+      <name>mnu_descripcion</name>
+      <columnExpressions>
+        <columnExpression>
+          <ID class="oracle.javatools.db.IdentifierBasedID">
+            <identifier class="java.lang.String">cd50afd1-f9b1-48f5-8e68-3f85561f240e</identifier>
+          </ID>
+          <expression class="oracle.javatools.db.sql.ColumnUsage">
+            <ID class="oracle.javatools.db.IdentifierBasedID">
+              <identifier class="java.lang.String">e58209bb-9d0c-4ffb-b728-c2ce37d8a5ba</identifier>
+            </ID>
+            <objectID class="oracle.javatools.db.IdentifierBasedID">
+              <name>mnu_descripcion</name>
+              <identifier class="java.lang.String">3febed60-1ddd-4b8f-9dcc-df4604b4f378</identifier>
+              <parent class="oracle.javatools.db.IdentifierBasedID">
+                <name>menu</name>
+                <identifier class="java.lang.String">b8bf8bb3-f795-44a0-b45f-7da9602ee127</identifier>
+                <schemaName>clublyf</schemaName>
+                <type>TABLE</type>
+              </parent>
+              <schemaName>clublyf</schemaName>
+              <type>COLUMN</type>
+            </objectID>
+            <outerJoin>false</outerJoin>
+            <properties>
+              <entry>
+                <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+                <value class="oracle.javatools.db.ReferenceID">
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <parent class="oracle.javatools.db.ReferenceID">
+                      <name>mnu_descripcion</name>
+                      <parent class="oracle.javatools.db.ReferenceID">
+                        <name>menu</name>
+                        <schemaName>clublyf</schemaName>
+                        <type>TABLE</type>
+                      </parent>
+                      <schemaName>clublyf</schemaName>
+                      <type>INDEX</type>
+                    </parent>
+                    <type>IndexObject</type>
+                  </parent>
+                  <type>SQLFragment</type>
+                </value>
+              </entry>
+            </properties>
+            <qualified>true</qualified>
+          </expression>
+          <order>ASC</order>
+          <properties>
+            <entry>
+              <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+              <value class="oracle.javatools.db.ReferenceID">
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>mnu_descripcion</name>
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <name>menu</name>
+                    <schemaName>clublyf</schemaName>
+                    <type>TABLE</type>
+                  </parent>
+                  <schemaName>clublyf</schemaName>
+                  <type>INDEX</type>
+                </parent>
+                <type>IndexObject</type>
+              </value>
+            </entry>
+          </properties>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>UNIQUE</indexType>
+      <parallelDegree>1</parallelDegree>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_descripcion</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>clublyf</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>clublyf</name>
+      </schema>
+    </indexe>
+    <indexe>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">aaf19df1-3516-4a0a-8336-2edbb5765adb</identifier>
+      </ID>
+      <name>mnu_display</name>
+      <columnExpressions>
+        <columnExpression>
+          <ID class="oracle.javatools.db.IdentifierBasedID">
+            <identifier class="java.lang.String">6b8fcacf-1fec-4fac-8cf0-d9abaa09ff41</identifier>
+          </ID>
+          <expression class="oracle.javatools.db.sql.ColumnUsage">
+            <ID class="oracle.javatools.db.IdentifierBasedID">
+              <identifier class="java.lang.String">c5a896e9-36cd-485a-910f-366a549eeceb</identifier>
+            </ID>
+            <objectID class="oracle.javatools.db.IdentifierBasedID">
+              <name>mnu_display</name>
+              <identifier class="java.lang.String">105dc3a7-b088-44c3-b1d5-e2023f1c7548</identifier>
+              <parent class="oracle.javatools.db.IdentifierBasedID">
+                <name>menu</name>
+                <identifier class="java.lang.String">b8bf8bb3-f795-44a0-b45f-7da9602ee127</identifier>
+                <schemaName>clublyf</schemaName>
+                <type>TABLE</type>
+              </parent>
+              <schemaName>clublyf</schemaName>
+              <type>COLUMN</type>
+            </objectID>
+            <outerJoin>false</outerJoin>
+            <properties>
+              <entry>
+                <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+                <value class="oracle.javatools.db.ReferenceID">
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <parent class="oracle.javatools.db.ReferenceID">
+                      <name>mnu_display</name>
+                      <parent class="oracle.javatools.db.ReferenceID">
+                        <name>menu</name>
+                        <schemaName>clublyf</schemaName>
+                        <type>TABLE</type>
+                      </parent>
+                      <schemaName>clublyf</schemaName>
+                      <type>INDEX</type>
+                    </parent>
+                    <type>IndexObject</type>
+                  </parent>
+                  <type>SQLFragment</type>
+                </value>
+              </entry>
+            </properties>
+            <qualified>true</qualified>
+          </expression>
+          <order>ASC</order>
+          <properties>
+            <entry>
+              <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+              <value class="oracle.javatools.db.ReferenceID">
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>mnu_display</name>
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <name>menu</name>
+                    <schemaName>clublyf</schemaName>
+                    <type>TABLE</type>
+                  </parent>
+                  <schemaName>clublyf</schemaName>
+                  <type>INDEX</type>
+                </parent>
+                <type>IndexObject</type>
+              </value>
+            </entry>
+          </properties>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>UNIQUE</indexType>
+      <parallelDegree>1</parallelDegree>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_display</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>clublyf</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>clublyf</name>
+      </schema>
+    </indexe>
+    <indexe>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">995abffa-ed43-4d90-baed-1b75cf278781</identifier>
+      </ID>
+      <name>mnu_id</name>
+      <columnExpressions>
+        <columnExpression>
+          <ID class="oracle.javatools.db.IdentifierBasedID">
+            <identifier class="java.lang.String">b0ed609d-5bf9-4e40-938e-d8aee2ba66eb</identifier>
+          </ID>
+          <expression class="oracle.javatools.db.sql.ColumnUsage">
+            <ID class="oracle.javatools.db.IdentifierBasedID">
+              <identifier class="java.lang.String">f9b11a6a-ed7d-4df3-960f-53fa4822be6b</identifier>
+            </ID>
+            <objectID class="oracle.javatools.db.IdentifierBasedID">
+              <name>mnu_id</name>
+              <identifier class="java.lang.String">c6aade9b-54a0-433d-81dc-901e465b08f5</identifier>
+              <parent class="oracle.javatools.db.IdentifierBasedID">
+                <name>menu</name>
+                <identifier class="java.lang.String">b8bf8bb3-f795-44a0-b45f-7da9602ee127</identifier>
+                <schemaName>clublyf</schemaName>
+                <type>TABLE</type>
+              </parent>
+              <schemaName>clublyf</schemaName>
+              <type>COLUMN</type>
+            </objectID>
+            <outerJoin>false</outerJoin>
+            <properties>
+              <entry>
+                <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+                <value class="oracle.javatools.db.ReferenceID">
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <parent class="oracle.javatools.db.ReferenceID">
+                      <name>mnu_id</name>
+                      <parent class="oracle.javatools.db.ReferenceID">
+                        <name>menu</name>
+                        <schemaName>clublyf</schemaName>
+                        <type>TABLE</type>
+                      </parent>
+                      <schemaName>clublyf</schemaName>
+                      <type>INDEX</type>
+                    </parent>
+                    <type>IndexObject</type>
+                  </parent>
+                  <type>SQLFragment</type>
+                </value>
+              </entry>
+            </properties>
+            <qualified>true</qualified>
+          </expression>
+          <order>ASC</order>
+          <properties>
+            <entry>
+              <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+              <value class="oracle.javatools.db.ReferenceID">
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>mnu_id</name>
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <name>menu</name>
+                    <schemaName>clublyf</schemaName>
+                    <type>TABLE</type>
+                  </parent>
+                  <schemaName>clublyf</schemaName>
+                  <type>INDEX</type>
+                </parent>
+                <type>IndexObject</type>
+              </value>
+            </entry>
+          </properties>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>UNIQUE</indexType>
+      <parallelDegree>1</parallelDegree>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>mnu_id</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>menu</name>
+              <schemaName>clublyf</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>clublyf</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>clublyf</name>
+      </schema>
+    </indexe>
+  </indexes>
+  <properties>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_CONNECTION</key>
+      <value class="java.lang.String">lyf_connection</value>
+    </entry>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+      <value class="oracle.javatools.db.ReferenceID">
+        <name>menu</name>
+        <schemaName>clublyf</schemaName>
+        <type>TABLE</type>
+      </value>
+    </entry>
+    <entry>
+      <key>TableType</key>
+      <value class="oracle.javatools.db.Table$TableType">NORMAL</value>
+    </entry>
+  </properties>
+  <schema>
+    <name>clublyf</name>
+  </schema>
+</table>

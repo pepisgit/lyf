@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<jdbc-data-source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.bea.com/ns/weblogic/jdbc-data-source http://www.bea.com/ns/weblogic/jdbc-data-source/1.0/jdbc-data-source.xsd"
+                  xmlns="http://www.bea.com/ns/weblogic/jdbc-data-source">
+    <name>lyf_connection</name>
+    <jdbc-driver-params>
+        <url>jdbc:mysql://68.169.55.209/clublyf</url>
+        <driver-name>com.mysql.jdbc.Driver</driver-name>
+        <properties>
+            <property>
+                <name>user</name>
+                <value>clublyf</value>
+            </property>
+        </properties>
+        <password-encrypted>27F6A562DC130E64E0F5480044B8064A34C25B8CA32FF6A96D20325E18A76B99</password-encrypted>
+    </jdbc-driver-params>
+    <jdbc-connection-pool-params>
+        <test-table-name>SQL SELECT 1</test-table-name>
+    </jdbc-connection-pool-params>
+    <jdbc-data-source-params>
+        <jndi-name>jdbc/lyf_connectionDS</jndi-name>
+        <scope>Application</scope>
+    </jdbc-data-source-params>
+</jdbc-data-source>

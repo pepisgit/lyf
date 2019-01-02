@@ -1,0 +1,29 @@
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+   <Resource 
+    name="jdbc/ClublyfDS" 
+    auth="Container" 
+    type="org.apache.tomcat.jdbc.pool.DataSource"
+    factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://149.56.122.160/clublyf?autoReconnect=true&amp;autoReconnectForPools=true"
+    username="pepis" 
+    password="clublyfttiot"
+    initialSize="20"
+    maxActive="100" 
+    maxIdle="100" 
+    minIdle="20"
+    maxWait="30000"
+    logAbandoned="true"
+    removeAbandonedTimeout = "180"
+    removeAbandoned="true"
+    validationQuery="select 1"
+    testOnBorrow="true"
+    testWhileIdle="true"
+    jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer;org.apache.tomcat.jdbc.pool.interceptor.ResetAbandonedTimer"
+    />
+    
+    <!-- url="jdbc:mysql://68.169.60.29/clublyf?autoReconnect=true&amp;autoReconnectForPools=true" -->
+        
+</Context>

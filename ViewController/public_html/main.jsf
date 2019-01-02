@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;height:100%;overflow:auto;"
+                onload="initMapa()">
+           <h:form id="frmMain">
+            <ui:include src="menu.jsf"/>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top" id="celdaLateral">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        
+                        <td width="747" style="padding-top:5px;padding-right:10px;" id="celdaPrincipal">
+                        
+                        <rich:panel header="Noticias" >
+                            <table cellpadding="0" cellspacing="0">
+                                
+                                <rich:dataTable value="#{sessionUser.ultimasNoticias}" var="row" rows="7">
+                                    <rich:column>
+                                      <table bgcolor="#E5E5E5">
+                                        <tr>
+                                            <td align="center" valign="middle"  height="103" style="vertical-align:middle;">
+                                              <h:graphicImage url="#{row.not_foto}"
+                                                              height="98" width="111"/>
+                                            </td>
+                                        </tr>
+                                      </table>
+                                    </rich:column>
+                                    <rich:column>
+                                        <table bgcolor="#E5E5E5">
+                                        <tr>
+                                            <td align="left" height="22" style="padding-left:3px; font-family:Arial Black;font-size:12pt;font-weight:bold;" width="624px">
+                                                <h:outputText escape="false" value="#{row.not_titulo}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="middle" height="55" style="padding-left:3px; font-family:Arial;font-size:10pt;" width="624px">
+                                                <h:outputText escape="false" value="#{row.fechaPublicacion} - #{row.not_resumen}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" height="17"
+                                                style="font-family:Arial, Helvetica, sans-serif; font-size:7pt; color:Blue; vertical-align:top;">
+                                                <a href="noticia.jsf?idnoticia=#{row.not_id}"> ver más...</a>
+                                            </td>
+                                        </tr>
+                                        </table>
+                                    </rich:column>
+                                    <f:facet name="footer"> 
+                                        <rich:dataScroller fastControls="hide" />
+                                    </f:facet>
+                                </rich:dataTable>
+                                
+
+                            </table>
+                        </rich:panel>
+                        
+                        
+                        </td>			
+                    </tr>
+                </table>
+            </div>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>

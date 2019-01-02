@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <h:form id="frmMain">
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="gestion" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top" id="celdaLateral">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        
+                        <td width="747" style="padding-top:5px;padding-right:10px;" id="celdaPrincipal">
+                        
+                        <rich:panel header="Proyeto G.R.A.U." >
+                            <table cellpadding="0" cellspacing="0" align="center">
+                                <tr>
+                                    <td align="center">
+                                        <h:graphicImage id="imgVer" url="/imagenes/grau.jpg"  />
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="padding-left:20px;padding-right:20px;padding-top:30px;font-size:12px;" align="justify">
+                                        <p>Proyecto G.R.A.U.  (Gestión de Ranking Ajedrecístico Unificado) es una experiencia piloto a desarrollar en la Ciudad de Córdoba con el objetivo de llegar a una solución de las diversas complejidades de la institucionalidad del ajedrez, y que privilegie aspectos deportivos para promover el desarrollo del ajedrez local.
+Consiste en un Sistema Unificado de Ranking al cual las distintas instituciones acuerdan respetar y construir colectivamente a partir de un reglamento que especifique el sistema.
+Se fundamenta en el deseo de que llegar a ACUERDOS BÁSICOS que pongan en valor un Sistema de Ranking que es un interés absolutamente genuino de todos los ajedrecistas cordobeses.</p>
+<br/>
+<p>En una primera instancia se organizará a partir del acuerdo al que arriben entidades del ajedrez de la Ciudad de Córdoba, pero está abierto a una sumatoria de esfuerzos que posibiliten la mejor coordinación con todo el ajedrez provincial.</p>
+
+<br/>
+
+<p style="padding-bottom:5px;"><b>Acuerdo Básico: </b></p>
+<p>Tomando como base el sistema de Rankings que históricamente ha llevado adelante la Asociación de Ajedrez de la Ciudad de Córdoba (AACC) y con el objetivo de llegar a un sistema en el que se contemple la mayor cantidad y variedad de actividad ajedrecística en la Ciudad de Córdoba, el <b><span style="color:#4889F1;">Club de Ajedrez de Luz y Fuerza</span></b> y la <a href="http://asociacioncordobesadeajedrez.blogspot.com.ar/" target="_blank">Asociación Cordobesa de Ajedrez</a> (ACDA) proponen la constitución de una Gestión de Ranking ajedrecístico Unificado (GRAU). </p>
+
+<br/>
+
+<p style="padding-bottom:5px;"><b>Constitución de una Comisión de Ranking: </b></p>
+<p>Será necesario en un primer momento constituir una Comisión de Ranking que será la encargada del cómputo y publicación periódica del ranking (a partir de ahora GRAU). Dicha comisión estará integrada por representantes de las entidades que acuerden participar en el sistema de ranking.
+En la Comisión se determinarán las personas idóneas para llevar adelante dichos cómputos y publicación del GRAU. </p>
+
+<br/>
+
+<p style="padding-bottom:5px;"><b>Fichaje:</b></p>
+<p>Todo jugador que participe en torneos válidos para el GRAU deberá llenar anualmente una FICHA DE REGISTRO EN EL SISTEMA GRAU. 
+En dicha ficha se dejará constancia de todos los datos personales, la afiliación institucional si la tuviera (o si se trata de un jugador libre).</p>
+<br/>
+<p>El fichaje posibilitará la constitución de una base de datos que estará a disposición de todas las Entidades que acuerden el espacio de trabajo conjunto que significa el GRAU.
+Aquellos jugadores que en sus fichas indiquen una afiliación institucional, serán considerados jugadores Libres hasta tanto y en cuanto las instituciones formalmente confirmen su pertenencia. Se fijará una casilla de correo oficial para tales tramitaciones que será gestionada por la Comisión de Ranking. </p>
+
+<br/>
+
+<p style="padding-bottom:5px;"><b>Página Web:</b></p>
+<p>El objetivo será constituir una página web en la que se publique el sistema de ranking. De esta manera cada jugador podrá observar su posición en el sistema, sus variaciones bi o trimestrales (a definir), las variaciones en cada torneo, su pertenencia institucional.
+En dicha página también se constituirá un historial con todos los torneos cargados al GRAU (con toda la información detallada del torneo, ritmo de juego, jugadores, árbitros, fotos del evento, etc.).</p>
+
+<br/>
+
+<p style="padding-bottom:5px;"><b>Financiación.</b></p>
+<p>El proyecto será financiado a partir de las inscripciones que las personas abonen en los distintos campeonatos.
+Cada torneo que aspire a ser elevado al GRAU deberá cumplir con una serie de requisitos (que se detallan en los Aspectos Técnicos) y se deberá a abonar una suma predeterminada por cada jugador del torneo. 
+De dicho monto se destinarán el 50&#37; para los gastos que implica el cómputo y mantenimiento del sitio web.
+El restante 50&#37; conformarán un fondo que se utilizará para la realización de un evento ajedrecístico anual: TORNEO MAYOR (Encuentro de 1 y 2 categoría, Encuentro de 3 y 4ta., Encuentro de Aficionados y Principiantes).</p>
+
+<br/>
+
+<p style="padding-bottom:5px;"><b>Aspectos técnicos.</b></p>
+<p>Podrán elevar torneos al GRAU entidades y organizadores que firmen un acta acuerdo con los principios y normas generales del GRAU.</p>
+<br/>
+<p>Serán computables al GRAU sólo aquellos torneos que se disputen a ritmos de juego no menores a media hora a finish por jugador, que se hallan desarrollado con reloj de ajedrez (digital o analógico) y hayan tenido la organización de un árbitro.</p>
+<br/>
+<p>Con posterioridad al evento el organizador deberá elevar:</p>
+<p style="padding-left:10px;margin-left:10px;"><br/>
+    <li style="margin-left:25px;">Un cuadro detallado del torneo.</li>
+    <li style="margin-left:25px;">Las fichas GRAU de todos aquellos ajedrecistas que no estuviesen cargados en el sistema.</li>
+    <li style="margin-left:25px;">Fotos del eventos para ser incorporadas en el historial.</li>
+    <li style="margin-left:25px;">Abonar el monto estipulado por la Comisión de Ranking.</li>
+</p>
+<br/>
+<p>Será necesario trabajar en la organización de un REGLAMENTO sobre los TORNEOS DE ASCENSO (cantidad autorizada de torneos de ascenso por cada entidad, porcentaje de jugadores mínimos, ritmos de juego, etc.).</p>
+
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </rich:panel>
+                        
+                        
+                        </td>			
+                    </tr>
+                </table>
+            </div>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>

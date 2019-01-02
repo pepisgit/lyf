@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+   <h:panelGroup rendered="#{opcion == null || opcion == 'inicio'}">
+      <div id="header" align="center">
+        <ul>
+            <li  class="home">INICIO</li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>
+
+   <h:panelGroup rendered="#{opcion == 'clases'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li class="home">CLASES</li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>
+    
+   <h:panelGroup rendered="#{opcion == 'nosotros'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li class="home">NOSOTROS</li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>
+    
+   <h:panelGroup rendered="#{opcion == 'cronograma'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li class="home">CRONOGRAMA</li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>
+
+   <h:panelGroup rendered="#{opcion == 'torneos'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li class="home">TORNEOS</li>
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>
+    
+   <h:panelGroup rendered="#{opcion == 'partidas'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>            
+            <li class="home">PARTIDAS</li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>    
+
+   <h:panelGroup rendered="#{opcion == 'ranking'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>            
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li class="home">RANKING</li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>  
+
+   <h:panelGroup rendered="#{opcion == 'contacto'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>            
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li class="home">CONTACTO</li>
+        </ul>
+      </div>
+    </h:panelGroup>  
+
+   <h:panelGroup rendered="#{opcion == 'gestion'}">
+      <div id="header" align="center">
+        <ul>
+            <li><a href="main.jsf">INICIO</a></li>
+            <li><a href="nosotros.jsf">NOSOTROS</a></li>
+            <li><a href="clases.jsf">CLASES</a></li>
+            <li><a href="cronograma.jsf">CRONOGRAMA</a></li>
+            <li><a href="torneos.jsf">TORNEOS</a></li>            
+            <li><a href="partidas.jsf">PARTIDAS</a></li>
+            <li><a href="ranking.jsf">RANKING</a></li>
+            <li><a href="contacto.jsf">CONTACTO</a></li>
+        </ul>
+      </div>
+    </h:panelGroup>  
+    
+</ui:composition>

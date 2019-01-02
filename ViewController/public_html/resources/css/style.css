@@ -1,0 +1,126 @@
+body{
+	padding:0; margin:0;
+	background-color:#636363; color:#000000; 
+	}
+	
+div, p, ul, a, h1, h2, h3, h4, form, label, input{ 
+	padding:0; margin:0;
+	}
+
+ul{
+    list-style-position: inside;
+}
+	
+.spacer{
+	line-height:0; font-size:0; clear:both;
+	}	
+
+/*---------------------------------------Header Start------------------------------------*/
+#contenido{
+    width:1024px;
+	position:relative;
+        overflow:auto;
+        height:100%;
+	margin:0 auto;
+	background-image:url(../../imagenes/wood_roger_2.jpg); background-repeat:repeat-y;
+}
+
+#tablaprincipal
+{
+	border-width: 1px;
+	border-spacing: 1px;
+	border-style: solid;
+	border-color: black;
+	border-collapse: collapse;
+}
+
+#celdaLateral
+{
+    vertical-align: top;
+}
+
+#celdaPrincipal
+{
+    vertical-align: top;
+}
+
+#header{
+	width:1024px;  position:relative;
+	margin:0 auto;
+	height:150px;
+	background-image:url(../../imagenes/fondo_header_5.jpg); background-repeat:no-repeat;
+	background-position:bottom
+	}
+
+#header ul{
+
+float:right;
+left:0px; top:0px;
+padding-right:10px;
+list-style:none;
+}
+
+#header ul li{
+	float:left;
+	font-family:Tahoma, Arial, Helvetica, sans-serif; font-size:10px;
+	color:#375D0B; background:#B8B6B7; 
+	text-align:center;
+	}
+
+#header ul li a{
+font-family:Tahoma, Arial, Helvetica, sans-serif; font-size:10px; 
+color:#000000; background:#B8B6B7; 
+width:90px; height:17px; padding-top:8px;
+text-decoration:none; display:block;
+}
+
+#header ul li.home{
+	font-family:Tahoma, Arial, Helvetica, sans-serif; font-size:10px; 
+	color:#FFFFFF; background:#979797; 
+	width:90px; height:17px; padding-top:8px;
+	text-decoration:none; display:block;
+	text-align:center; float:left;
+	}
+	
+#header ul li a:hover{
+	background:#EFFFFF;
+	color:#375D0B;
+	height:17px; width:90px;
+	}
+#frmNoticia{
+        font-family:Tahoma, Arial, Helvetica, sans-serif;
+        font-size:12px;
+}
+
+#frmNoticia p{
+    padding: 7px;
+}
+
+.estiloTitulo {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.estiloTest {
+    background-color:#D7E7FE;
+}
+
+.infoBig {
+    font-size: 14px;
+    color:Blue;
+    font-weight: bold;
+}
+
+.infoNorm {
+    font-size: 11px;
+    color:black;
+    font-weight: bold;
+}
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }

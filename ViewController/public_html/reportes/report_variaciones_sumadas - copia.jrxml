@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_variaciones_sumadas" language="groovy" pageWidth="842" pageHeight="700" orientation="Landscape" columnWidth="772" leftMargin="50" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1a68e9c-362e-4807-9c2d-f6779785b8f5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="PAR_RKG_ID" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT j.jug_id,
+    	   CONCAT(p.per_apellido, ', ', p.per_nombres) AS  nombre,
+           gjt.*,
+           CONCAT(gh.his_puntaje - gh.his_variacion, '  -  ', gh.his_categoria_anterior, 'º') AS inicial,
+           CONCAT(gh.his_puntaje, '  -  ', his_categoria, 'º') AS final,
+           gh.his_puntaje,
+           gh.his_variacion,
+           gh.his_categoria,
+           gh.his_categoria_anterior
+      FROM grau_jugadores_torneos gjt
+INNER JOIN jugadores j ON j.jug_id = gjt.gjt_jug_id
+INNER JOIN personas p ON p.per_id = j.per_id
+INNER JOIN grau_historial gh ON gh.his_rkg_id = $P{PAR_RKG_ID} AND gh.his_jug_id = j.jug_id
+     WHERE gjt.gjt_rkg_id = $P{PAR_RKG_ID}
+       AND gh.his_puntaje > 0
+       AND gh.his_categoria_anterior IS NOT NULL]]>
+	</queryString>
+	<field name="jug_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="gjt_rkg_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_tor_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_jug_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_part_computables" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_performance" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_puntos_obtenidos" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_grau_inicial" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_categoria_inicial" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_puntos_esperados" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_coeficiente_k" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_cambio_grau" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_coeficiente_m" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gjt_ascenso_obtenido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="inicial" class="java.lang.String"/>
+	<field name="final" class="java.lang.String"/>
+	<field name="his_puntaje" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="his_variacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="his_categoria" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="his_categoria_anterior" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="189" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="800" height="20" uuid="7b25bcd1-3eeb-42f8-9887-a3b2d752fd9e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GESTION DEL RANKING AJEDRECÍSTICO UNIFICADO – G.R.A.U.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="25" width="800" height="20" uuid="87ad9b36-5231-4b8f-acac-cfe3f13c6f86"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sumatoria de Variaciones para Jugadores Rankeados]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="2" y="149" width="480" height="19" uuid="a8897b67-8180-464f-b0ea-509c975e9984"/>
+				<subreportParameter name="P_RKG_ID">
+					<subreportParameterExpression><![CDATA[$P{PAR_RKG_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreport_torneoscomputados.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="2" y="129" width="660" height="20" uuid="26d55d5a-c1ae-464a-868f-cbfe8edaf4fd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Torneos Computados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="77" width="100" height="20" uuid="d5451825-e87c-425c-b593-b12336ea719e"/>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="57" width="100" height="20" uuid="959104a9-0c6a-4801-9dde-b29728b1abad"/>
+				<text><![CDATA[30/06/2017]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="101" height="20" uuid="19f31770-5de4-42e2-8ae4-21e737f66c31"/>
+				<text><![CDATA[Fecha del Ranking:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="77" width="101" height="20" uuid="a8a41d6b-9c76-41bc-974d-8a0651c52af8"/>
+				<text><![CDATA[Torneos computados:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="164" splitType="Stretch">
+			<crosstab>
+				<reportElement x="2" y="0" width="770" height="162" uuid="d1f6775d-4484-487c-8219-eb39d61de342"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="124" y="0" width="43" height="19" uuid="c9d750ac-96f2-4697-934f-6966f4bf6ee8"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[Id]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="124" height="19" uuid="2d902ae3-0684-44c1-8e30-f8f8f701fb0a"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[Nombre]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="167" y="0" width="79" height="19" uuid="3b976d3b-b5f5-48b0-84f0-681515036763"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[GRAU  Inicial]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="246" y="0" width="100" height="19" uuid="5a431327-28ac-42bc-8e3c-bbeca74c8f05"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[GRAU Final]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="group1" width="124">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{nombre}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="124" height="16" uuid="8f81e33f-17e1-4039-ab86-a3fe28e8df78"/>
+								<box leftPadding="2">
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$V{group1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="jug_id" width="43">
+					<bucket class="java.lang.Integer">
+						<bucketExpression><![CDATA[$F{jug_id}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#C3CFD9" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="43" height="16" uuid="8fd5b793-2df8-42cb-950a-3841a2156ddf"/>
+								<textFieldExpression><![CDATA[$V{jug_id}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group2" width="79">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{inicial}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isBlankWhenNull="true">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="79" height="16" uuid="209ebcf6-80a4-461a-9c10-b3b95c31780d"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textFieldExpression><![CDATA[$V{group2}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group3" width="100">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{final}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="100" height="16" uuid="578c1904-bd8c-4b73-980d-46f60bac9046"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textFieldExpression><![CDATA[$V{group3}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="gjt_tor_id" height="19" totalPosition="End">
+					<bucket class="java.lang.Integer">
+						<bucketExpression><![CDATA[$F{gjt_tor_id}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#C3CFD9" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="31" height="19" uuid="659d5239-8c07-4800-8a8f-18c7fc751d82"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$V{gjt_tor_id}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#E6F3FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="19" uuid="093804c1-ca24-48f4-b2a9-2012973d1549"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="gjt_cambio_grauMeasure" class="java.math.BigDecimal" calculation="Sum">
+					<measureExpression><![CDATA[$F{gjt_cambio_grau}]]></measureExpression>
+				</measure>
+				<measure name="measure1" class="java.lang.String">
+					<measureExpression><![CDATA[$F{his_categoria} < $F{his_categoria_anterior}? "▲":($F{his_categoria} > $F{his_categoria_anterior}?"▼":"")]]></measureExpression>
+				</measure>
+				<crosstabCell width="31" height="16">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="31" height="16" uuid="17d5d299-afba-4560-89c1-9b6e00b5f09c">
+								<printWhenExpression><![CDATA[$V{gjt_cambio_grauMeasure} != 0]]></printWhenExpression>
+							</reportElement>
+							<textElement verticalAlignment="Middle">
+								<font size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{gjt_cambio_grauMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="jug_id">
+					<cellContents backcolor="#E6F3FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="bf4521c1-c175-4832-8b85-769966f32cab"/>
+							<textFieldExpression><![CDATA[$V{gjt_cambio_grauMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="79" height="16" columnTotalGroup="gjt_tor_id">
+					<cellContents backcolor="#E6F3FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="###0.00;-###0.00">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="45" height="16" uuid="16449060-a619-482d-84d0-6e9e424e133f"/>
+							<box rightPadding="2"/>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$V{gjt_cambio_grauMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="">
+							<reportElement style="Crosstab Data Text" x="45" y="0" width="34" height="16" forecolor="#009900" uuid="c78a748f-0b52-4a82-937f-fb8fdc7719f0">
+								<printWhenExpression><![CDATA[$V{measure1}.equals( "▲" )]]></printWhenExpression>
+							</reportElement>
+							<box rightPadding="2"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Black" isBold="true" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{measure1}]]></textFieldExpression>
+						</textField>
+						<textField pattern="">
+							<reportElement style="Crosstab Data Text" x="45" y="0" width="34" height="16" forecolor="#FF0000" uuid="1c373a03-21ba-4a39-8076-4b1b1f3c1025">
+								<printWhenExpression><![CDATA[$V{measure1}.equals( "▼" )]]></printWhenExpression>
+							</reportElement>
+							<box rightPadding="2"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Black" isBold="true" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{measure1}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="jug_id" columnTotalGroup="gjt_tor_id">
+					<cellContents backcolor="#E6F3FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="1913ca87-08b8-460e-8679-04323ddd4a4d"/>
+							<textFieldExpression><![CDATA[$V{gjt_cambio_grauMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1" columnTotalGroup="gjt_tor_id">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group2">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group2" columnTotalGroup="gjt_tor_id">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group3">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group3" columnTotalGroup="gjt_tor_id">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

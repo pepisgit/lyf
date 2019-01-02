@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="cronograma" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+                        
+                        <rich:panel header="Cronograma" >
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr>
+                                    <td style="padding-bottom:20px;">
+                                        Con el Calendario de Google podés ver los próximos eventos del Club de un vistazo.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <iframe src="https://www.google.com/calendar/embed?title=Calendario%20del%20Club&amp;showPrint=0&amp;showTz=0&amp;mode=AGENDA&amp;height=200&amp;wkst=2&amp;bgcolor=%23999999&amp;src=clubdeajedrezluzyfuerza%40gmail.com&amp;color=%232F6309&amp;ctz=America%2FArgentina%2FBuenos_Aires" style=" border:solid 1px #777 " width="600" height="200" frameborder="0" scrolling="no"></iframe>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <h:outputText escape="false" value="#{backing_cronograma.htmlCronograma}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

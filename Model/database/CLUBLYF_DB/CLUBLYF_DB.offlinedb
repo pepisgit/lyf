@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProviderSettings xmlns="http://xmlns.oracle.com/ide/hash">
+   <hash n="dataTypeSettings">
+      <value n="sourceKey" v="oracle.javatools.db.mysql.MySQL5"/>
+   </hash>
+   <value n="id" v="007c43b9-4252-449e-b02d-3bbf1bb1dad5"/>
+   <value n="name" v="CLUBLYF_DB"/>
+</ProviderSettings>

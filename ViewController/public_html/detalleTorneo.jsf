@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="torneos" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+                        <rich:panel header="Torneos - Detalles" >
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td width="100%" style="padding-bottom:3px;padding-right:2px;">
+                                         <rich:panel title="Datos del Torneo" id="panelFiltros" style="background-color:#E3FEFF;">
+                                            <table cellpadding="0" cellspacing="0" width="100%" border="0" >
+                                                <tr>
+                                                    <td width="120" style="padding-bottom:5px;">
+                                                        <h:outputText value="Denominación:" />
+                                                    </td>
+                                                    <td style="padding-bottom:5px;">
+                                                        <h:outputText styleClass="infoBig" value="#{detalleTorneoBean.torneo.tor_nombre}" >
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        <h:outputText value="Fecha:" />
+                                                    </td>
+                                                    <td>
+                                                        <h:outputText styleClass="infoNorm" value="#{detalleTorneoBean.torneo.tor_fecha_inicio}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        <h:outputText value="Organizador:" />
+                                                    </td>
+                                                    <td>
+                                                        <h:outputText styleClass="infoNorm" value="#{detalleTorneoBean.torneo.tor_organizador}" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        <h:outputText value="Sistema:" />
+                                                    </td>
+                                                    <td>
+                                                        <h:outputText styleClass="infoNorm" value="#{detalleTorneoBean.torneo.sistema}" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        <h:outputText value="Rondas:" />
+                                                    </td>
+                                                    <td>
+                                                        <h:outputText styleClass="infoNorm" value="#{detalleTorneoBean.torneo.tor_rondas}" />
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr style="#{detalleTorneoBean.styleFilaClasificado}">
+                                                    <td style="padding-top:5px">
+                                                        <h:outputText value="Clasificado:" />
+                                                    </td>
+                                                    <td style="padding-top:5px">
+                                                        <h:outputText styleClass="infoBig" value="#{detalleTorneoBean.jugadorClasificado}" />
+                                                    </td>
+                                                </tr>
+                                                
+                                            </table>
+                                        </rich:panel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" align="right" style="padding-bottom:3px;padding-right:2px;">
+                                        <h:commandLink value="Volver" action="volver" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-bottom:6px;">
+                                        <rich:collapsiblePanel header="Resultados" switchType="client" expanded="false">
+                                            <h:outputText value="#{backing_detalleTorneo.htmlResultados}" escape="false"/>
+                                        </rich:collapsiblePanel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-bottom:6px;">
+                                        <rich:collapsiblePanel header="Posiciones" switchType="client" expanded="true">
+                                            <h:outputText value="#{backing_detalleTorneo.htmlPosiciones}" escape="false"/>
+                                        </rich:collapsiblePanel>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                        </rich:panel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

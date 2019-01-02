@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <style type="text/css">
+                #divTexto p
+                {
+                    margin: 5px;
+                    padding: 5px;
+                }
+            </style>
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="clases" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top" >
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" valign="top" style="padding-top:5px;padding-right:10px;">
+                        
+                        <rich:panel header="Clases de Ajedrez" >
+                          <div style="font-size:12px;" id="divTexto">
+                            <p align="justify">
+                                La Escuela de Ajedrez del Club brinda clases para todos los niveles y todas las edades. 
+En la sede del sindicato de Luz y Fuerza, Rivadeo 1330, se puede aprender o perfeccionar el movimiento de las piezas.
+                            </p>
+                            <p align="justify">
+                                Desde este espacio, nuestros profesores, que cuentan con amplia experiencia ajedrecística y pedagógica,
+                                inician en el arte del ocho por ocho a todos los interesados, poniendo énfasis en la educación temprana
+                                de los niños, a fin de que aprendan a pensar lógicamente, utilizando el entretenimiento como estímulo para
+                                fortalecer el intelecto, esa herramienta tan poco ponderada en estos tiempos.
+                            </p>
+                            <p align="center">
+                                <h:graphicImage url="/imagenes/clases_foto01.jpg" />
+                            </p>
+                            <p align="justify">
+                                Destacados jugadores que hoy en día siguen en nuestro club se han beneficiado de las actividades realizadas
+                                en la Escuela de Ajedrez, en conjunto con los Torneos organizados todas las semanas para poner en práctica y
+                                consolidar los conocimientos adquiridos.
+                            </p>
+                            <p>
+                                Desde el Club de Ajedrez Luz y Fuerza te invitamos a que te acerques y a la Escuela. Los horarios son los siguientes:
+                            </p>
+                            <p>
+                                <li style="margin-left:45px;">Sábados, de 10:30 a 12:30 hs, Profesora <b>WIM Milagros Brizzi </b></li>
+                            </p>
+                          </div>
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

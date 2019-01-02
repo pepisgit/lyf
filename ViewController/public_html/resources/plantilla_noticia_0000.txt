@@ -1,0 +1,45 @@
+<html>
+<body>
+<style type="text/css">
+<!--
+.Estilo1 {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: left;
+}
+.Estilo2 {font-size:12px;}
+.Estilo5 {font-family: Arial, Helvetica, sans-serif;font-size: 18px;}
+-->
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f1f1f1">
+ 
+ <tr>
+  <td>
+	<table align="center">
+	  <tr>
+		<td class="Estilo1"><p><b>T&iacute;tulo de la Noticia</b></p>
+		</td>
+	 </tr>
+    </table>
+   </td>  
+ </tr>
+
+ <tr>
+  <td>
+	<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" >
+	  <tr>
+		<td height="246" align="left" valign="top" ><p align="justify">                
+		  <p align="justify">
+			Contenido de la noticia comienza  aqu&iacute;
+		  </p>
+        </td>
+	 </tr>
+	</table>
+  </td>
+ </tr>
+
+ </table>
+ </body>
+</html>
+
+ 

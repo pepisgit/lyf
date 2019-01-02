@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; overflow: hidden;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+            <!--script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script-->
+            <script type="text/javascript" src="./js/editarNoticia.js"></script>
+            
+            <link href="./resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
+
+            <script type="text/javascript">
+            
+            var jcrop_api;
+            var popupVisible = 0;
+            
+            function cropearImagen()
+            {
+
+              jQuery(function($){
+
+                var boundx,
+                    boundy,
+        
+                    // Grab some information about the preview pane
+                    $preview = $('#preview-pane'),
+                    $pcnt = $('#preview-pane .preview-container'),
+                    $pimg = $('#preview-pane .preview-container img'),
+            
+                    xsize = $pcnt.width(),
+                    ysize = $pcnt.height();
+ 
+                console.log('init',[xsize,ysize]);
+                $('#frm01\\:cropTarget').Jcrop({
+                  onChange: updatePreview,
+                  onSelect: updatePreview,
+                  aspectRatio: xsize / ysize
+                },function(){
+                  // Use the API to get the real image size
+                  var bounds = this.getBounds();
+                  boundx = bounds[0];
+                  boundy = bounds[1];
+                  // Store the API in the jcrop_api variable
+                  jcrop_api = this;
+            
+                  // Move the preview into the jcrop container for css positioning
+                  $preview.appendTo(jcrop_api.ui.holder);
+                });
+            
+                function updatePreview(c)
+                {
+                  if (parseInt(c.w) > 0)
+                  {
+                    var rx = xsize / c.w;
+                    var ry = ysize / c.h;
+            
+                    $pimg.css({
+                      width: Math.round(rx * boundx) + 'px',
+                      height: Math.round(ry * boundy) + 'px',
+                      marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                      marginTop: '-' + Math.round(ry * c.y) + 'px'
+                    });
+                  }
+                  $('#frm01\\:hdnX1').val(c.x);
+                  $('#frm01\\:hdnY1').val(c.y);
+                  $('#frm01\\:hdnW').val(c.w);
+                  $('#frm01\\:hdnH').val(c.h);
+                };
+            
+              });
+              return false;
+            }
+            
+            </script>            
+            
+            <style type="text/css">
+            
+            .jcrop-holder #preview-pane {
+              display: block;
+              position: absolute;
+              z-index: 2000;
+              top: 10px;
+              right: -280px;
+              padding: 6px;
+              border: 1px rgba(0,0,0,.4) solid;
+              background-color: white;
+            
+              -webkit-border-radius: 6px;
+              -moz-border-radius: 6px;
+              border-radius: 6px;
+            
+              -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+              -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+              box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+            }
+            
+            #preview-pane .preview-container {
+              width: 123px;
+              height: 110px;
+              overflow: hidden;
+            }
+            
+            </style>
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;height:100%;overflow:auto;" 
+                onload="" 
+                onunload="desactivarMantenerSesion();">
+            
+            <script type="text/javascript" src="./js/jquery.Jcrop.min.js"></script>
+            
+            <!--script type="text/javascript">
+                var finder = new CKFinder();
+                finder.basePath = './ckfinder/';
+                finder.create();
+            </script-->
+            
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="gestion" />
+            </ui:include>
+            
+            <h:form id = "frm01">
+            <div id="contenido" align="center">
+                <table id="tablaprincipal" width="100%">
+                    <tr>
+                        <td height="800" width="272" align="center" id="celdaLateral">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        
+                        <td width="747" style="padding-top:5px;padding-right:10px;" id="celdaPrincipal">
+                            <rich:panel header="#{editarNoticiasBean.modoEdicion == 0? 'Nueva Noticia': 'Modificar Noticia'}">
+                            
+                            <rich:collapsiblePanel header="Datos de la Noticia" switchType="client" >
+                                <table cellpadding="0" cellspacing="0" border="1">
+                                    <tr>
+                                        <td rowspan="2" width="200" align="center">
+                                            <rich:panel style="height:180px;">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Imagen de Portada" />
+                                                </f:facet>
+                                                <table cellpadding="0" cellspacing="0" border="0">
+                                                    <tr>
+                                                    <td align="center">
+                                                        <h:graphicImage value="#{editarNoticiasBean.imagenPortada}" width="111" height="98" id="imagenPortada">
+                                                        </h:graphicImage>
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td align="center" style="padding-top:5px;">
+                                                        <h:commandButton value="Cambiar">
+                                                            <rich:componentControl target="imagenPopup" operation="show" />
+                                                        </h:commandButton>
+                                                    </td>
+                                                    </tr>
+                                                </table>
+                                            </rich:panel>
+                                        </td>
+                                        <td width="600" align="left">
+                                            <rich:panel >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Título" />
+                                                </f:facet>
+                                                <h:inputText value="#{editarNoticiasBean.txtTitulo}" style="width:500px;" />
+                                            </rich:panel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <rich:panel>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Resumen" />
+                                                </f:facet>
+                                                <h:inputTextarea value="#{editarNoticiasBean.txtResumen}" rows="4" cols="92" />
+                                            </rich:panel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" colspan="2">
+                                            <rich:panel>
+                                                <h:selectBooleanCheckbox id="chkFbComments" title="Activar comentarios de Facebook" 
+                                                                         binding="#{backing_editarNoticia.chkFbComments}"/>
+                                                <h:outputLabel value="Activar comentarios de Facebook" for="chkFbComments" />
+                                            </rich:panel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </rich:collapsiblePanel>
+                            
+                            <rich:popupPanel id="imagenPopup" modal="false" resizeable="false" 
+                                             domElementAttachment="form" width="920" height="500"
+                                             onshow="popupVisible = 1; return cropearImagen();" onhide="popupVisible = 0">
+                                             
+                                <f:facet name="header">
+                                    <h:outputText value="Cambiar Imágen de Portada" />
+                                </f:facet>
+                                <f:facet name="controls">
+                                    <h:outputLink value="#" onclick="#{rich:component('imagenPopup')}.hide(); return false;">
+                                        X
+                                    </h:outputLink>
+                                </f:facet>
+                                
+                                <h:inputHidden id="hdnX1" binding="#{backing_editarNoticia.hdnX1}"/>
+                                <h:inputHidden id="hdnY1" binding="#{backing_editarNoticia.hdnY1}"/>
+                                <h:inputHidden id="hdnH" binding="#{backing_editarNoticia.hdnHeight}"/>
+                                <h:inputHidden id="hdnW" binding="#{backing_editarNoticia.hdnWidth}"/>
+                                
+                                <rich:panel id = "pnlCrop" >
+                                <table cellpadding="0" cellspacing="2"  border="0" id="tblCrop">
+                                    <tr>
+                                        <td height="510" width="650" align="center" valign="middle">
+                                          <h:graphicImage  value="#{editarNoticiasBean.imagenCrop}" id="cropTarget">
+                                          </h:graphicImage>
+                                          <div id="preview-pane">
+                                            <div class="preview-container">
+                                                <img src="#{editarNoticiasBean.imagenCrop}" class="jcrop-preview" alt="Preview"/>
+                                            </div>
+                                          </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <script type="text/javascript">
+                                    try{
+                                        jcrop_api.destroy();
+                                    }
+                                    catch (e){
+                                        // no pasa naranja;
+                                    }
+                                    if (popupVisible == 1)
+                                    {
+                                        cropearImagen();
+                                    }
+                                </script>
+                                </rich:panel>
+                                
+                                <rich:fileUpload id="uploadThumb" fileUploadListener="#{backing_editarNoticia.subirImagen_listener}" 
+                                    acceptedTypes="jpg, JPG" listHeight="70"
+                                    ontyperejected="alert('Solo se aceptan archivos con extensión jpg');" 
+                                    maxFilesQuantity="1" style="height:70px;" 
+                                    onbeforedomupdate="jcrop_api.destroy();">
+                                    <a4j:ajax event="uploadcomplete" execute="@form" render="pnlCrop" />
+                                </rich:fileUpload>
+                                <!--h:commandButton value="crop!" onclick="return cropearImagen();" />
+                                <h:commandButton value="destroy!" onclick="jcrop_api.destroy(); return false;" /-->
+                                <h:commandButton id="cmdAceptarImgCrop" value="Aceptar" action="#{backing_editarNoticia.cambiarImagen_action}"/>
+                            </rich:popupPanel>
+
+                            <rich:popupPanel id="insertImagenPopup" modal="false" resizeable="false" 
+                                             domElementAttachment="form" width="820" height="500">
+                                <f:facet name="header">
+                                    <h:outputText value="Insertar Imagen" />
+                                </f:facet>
+                                <f:facet name="controls">
+                                    <h:outputLink value="#" onclick="#{rich:component('insertImagenPopup')}.hide(); return false;">
+                                        X
+                                    </h:outputLink>
+                                </f:facet>
+                                <rich:panel id = "pnlImg">
+                                    <table cellpadding="0" cellspacing="2"  border="0" width="100%">
+                                        <tr>
+                                            <td height="510" width="100%" align="center" valign="middle" colspan="2">
+                                              <h:graphicImage  value="#{editarNoticiasBean.imagenInsert}" id="imagenPreview">
+                                              </h:graphicImage>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:selectOneRadio value="#{editarNoticiasBean.optEpigrafe}" id="srEpigrafe"
+                                                                  binding="#{backing_editarNoticia.radioEpigrafe}"
+                                                                  valueChangeListener="#{backing_editarNoticia.changeRadioEpigrafe}">
+                                                    
+                                                    <a4j:ajax event="click" render="pnlImg" />
+                                                    <f:selectItem itemValue="S" itemLabel="Imagen sola" id="optEpigrafeS" />
+                                                    <f:selectItem itemValue="E" itemLabel="Imagen con epígrafe" id="optEpigrafeE"/>
+                                                </h:selectOneRadio>
+                                            </td>
+                                            <td>
+                                                <h:inputText size="80" id="txtEpigrafe" rendered="#{editarNoticiasBean.optEpigrafe == 'E'}"
+                                                             binding="#{backing_editarNoticia.txtEpigrafe}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <h:panelGroup id="grpHidden">
+                                        <h:inputHidden id="hdnImagen" value="#{editarNoticiasBean.ultimaImagenSubida}"/>
+                                        <h:inputHidden id="hdnImagenId" value="#{editarNoticiasBean.ultimaImagenSubidaHtmlId}"/>
+                                        <h:inputHidden id="hdnOptEpigrafe" value="#{editarNoticiasBean.optEpigrafe}"/>
+                                        <h:inputHidden id="hdnEpigrafe" value="#{editarNoticiasBean.epigrafe}"/>
+                                    </h:panelGroup>
+                                </rich:panel>
+                                
+                                <table cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                <td>
+                                <rich:fileUpload id="uploadImagen" fileUploadListener="#{backing_editarNoticia.insertarImagen_listener}" 
+                                    acceptedTypes="jpg,JPG" listHeight="70"
+                                    ontyperejected="alert('Solo se aceptan archivos con extensión jpg');" 
+                                    maxFilesQuantity="1" style="height:70px;">
+                                    
+                                    <a4j:ajax event="uploadcomplete" execute="@form" render="pnlImg,cmdAceptarIns" />
+                                </rich:fileUpload>
+                                </td>
+                                <td>
+                                <h:commandButton id="cmdAceptarIns" value="Aceptar" 
+                                                 action="#{backing_editarNoticia.insertarImagen_action}" 
+                                                 disabled="#{editarNoticiasBean.imagenInsert == null}">
+                                    <f:ajax onevent="insertarImagenTemp" execute="@form" render="pnlImg"/>
+                                </h:commandButton>
+                                
+                                <!--h:commandButton onclick="#{rich:component('uploadImagen')}.__removeAllItems(); return false;" value="TEST" /-->
+                                
+
+                                </td>
+                                </tr>
+                                </table>
+                            </rich:popupPanel>
+                            
+                            <rich:toolbar height="26px">
+                                <rich:dropDownMenu mode="ajax">
+                                    <f:facet name="label">
+                                        <h:panelGroup>
+                                            <!--h:graphicImage value="/imagenes/icono01.png" styleClass="pic" alt="copy" /-->
+                                            <h:outputText value="Noticia" />
+                                        </h:panelGroup>
+                                    </f:facet>
+                                    <!--rich:menuItem label="Publicar" actionListener="#{backing_editarNoticia.publicar_action}" execute="@this" mode="server">
+                                    </rich:menuItem-->
+                                    <rich:menuItem label="Publicar" action="#{backing_editarNoticia.publicar_action}" execute="@this" mode="server">
+                                    </rich:menuItem>
+                                    <rich:menuItem label="Guardar como Borrador" action="#{backing_editarNoticia.borrador_action}" execute="@this" mode="server"/>
+                                    <rich:menuSeparator id="menuSeparator11" />
+                                    <rich:menuItem label="Volver" action="#{backing_editarNoticia.volver_action}" />
+                     
+                                </rich:dropDownMenu>
+
+                                <rich:dropDownMenu mode="ajax">
+                                    <f:facet name="label">
+                                        <h:panelGrid cellpadding="0" cellspacing="0" columns="2" style="vertical-align:middle">
+                                            <h:outputText value="Insertar" />
+                                        </h:panelGrid>
+                                    </f:facet>
+                                    <rich:menuItem>
+                                        <h:outputText value="Datos de Torneo" />
+                                    </rich:menuItem>
+                                    <rich:menuItem onclick="#{rich:component('insertImagenPopup')}.show(); return false;">
+                                        <h:outputText value="Imagen" />
+                                    </rich:menuItem>
+                                    <rich:menuItem>
+                                        <h:outputText value="Visor de Partida" />
+                                    </rich:menuItem>                                    
+                                </rich:dropDownMenu>
+                            </rich:toolbar>
+                            
+                            <h:inputTextarea id="editor1" binding="#{backing_editarNoticia.txtNoticia}"
+                                             value="#{editarNoticiasBean.txtContenido}" >
+                            </h:inputTextarea>
+                                    
+                                    <!--textarea name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea-->
+                                
+                                <script type="text/javascript">
+                                    CKEDITOR.replace( 'frm01:editor1', {
+                                        allowedContent: true,
+                                        height: 500,
+                                        toolbar: [
+                                            { name: 'document', items: [ 'Source'] },
+                                            { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                                            '/',
+                                            { name: 'insert', items: [ 'Table', 'HorizontalRule', 'SpecialChar' ] },
+                                            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ] },
+                                            { name: 'links', items: [ 'Link', 'Unlink'] },
+                                            '/',
+                                            { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat' ] },
+                                            { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                                            { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                                            { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
+                                        ]
+                                    }
+                                    );
+                                    
+                                    CKEDITOR.instances['frm01:editor1'].on ('key', function (event)
+                                                {
+                                                    var tecla = event.data.keyCode;
+                                                    
+                                                    if (tecla == 46)
+                                                    {
+                                                        try
+                                                        {
+                                                            var sel = CKEDITOR.instances['frm01:editor1'].getSelection();
+                                                            var ranges = sel.getRanges();
+                                                            var range = ranges[0];
+                                                            var anc = range.getCommonAncestor();
+                                                    
+                                                            var idElemento = anc.getId();
+                                                            
+                                                            if (idElemento != null &amp;&amp; idElemento.indexOf('not_img') != -1)
+                                                            {
+                                                                var idTabla = 'tbl' + idElemento;
+                                                                var elemTabla = CKEDITOR.instances['frm01:editor1'].document.getById(idTabla);
+                                                                if (elemTabla != null)
+                                                                    elemTabla.remove(false);
+                                                            }
+                                                        }
+                                                        catch (e)
+                                                        {}
+                                                    }
+                                                });
+                                </script>
+
+                                <h:commandLink id="lnkVolver" action="#{backing_editarNoticia.volver_action}" value="Volver" />
+                                
+                            </rich:panel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <a4j:jsFunction name="mantenerSesion" action="#{backing_editarNoticia.mantener_sesion_action}"/>
+            <script type="text/javascript">
+                llamadaMantenerSesion();
+            </script>
+            </h:form>
+            
+        </h:body>
+    </html>
+</f:view>

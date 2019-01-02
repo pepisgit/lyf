@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="./js/visualizarArchivos.js"></script>
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;height:100%;overflow:auto;"
+        onload="iniciar();">
+           <h:form id="frmArchivos">
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="gestion" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+
+                        <rich:panel header="Gestión de Archivos" id="panelPrincipal">
+                            <h:panelGrid id="statusMessages" columns="1">
+                                <rich:messages  id="messages1" showDetail="true" 
+                                                styleClass="messages" 
+                                                globalOnly="false" />
+                            </h:panelGrid>                        
+                        
+                            <table cellpadding="0" cellspacing="0" border="1" align="center">
+                                <tr>
+                                    <td width="750" align="left">
+                                        <rich:panel >
+                                            <f:facet name="header">
+                                                <h:outputText value="Filtro" />
+                                            </f:facet>
+                                            <h:inputText binding="#{backing_gestionarArchivos.txtRuta}" size="130" id="txtRuta"
+                                                         onkeypress="sePresionoEnter(event, 'frmArchivos:lnkBuscar');"/>
+                                            <h:inputHidden binding="#{backing_gestionarArchivos.hdnInit}" id="hdnInit" />
+                                            <a4j:commandLink id="lnkBuscar" execute="@this"
+                                                             action="#{backing_gestionarArchivos.lnkBuscar_action}" 
+                                                             render="panelArchivos" >
+                                            </a4j:commandLink>
+                                        </rich:panel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <rich:panel id="panelArchivos" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Archivos" />
+                                            </f:facet>
+                                            <rich:toolbar height="26" itemSeparator="grid">
+                                                <rich:toolbarGroup>
+                                                   <a4j:commandLink action="#{backing_gestionarArchivos.subir_action}"
+                                                                    execute="@this"
+                                                                    immediate="true"
+                                                                    render="panelArchivos">
+                                                      <h:graphicImage url="/imagenes/arriba.jpg" height="16" width="16" alt="Subir al directorio padre"/>
+                                                   </a4j:commandLink>
+                                                   <a4j:commandLink onclick="#{rich:component('uploadPanel')}.show(); return false;">
+                                                      <h:graphicImage url="/imagenes/nuevo.png" height="16" width="16" alt="Subir al directorio padre"/>
+                                                   </a4j:commandLink>                                                   
+                                                </rich:toolbarGroup>
+                                            </rich:toolbar>
+                                            <rich:dataTable  rows="15" value="#{gestionarArchivosBean.listaArchivos}" var="row" style="width:100%">
+
+                                                <rich:column style="width:400px;" >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Nombre"/>
+                                                    </f:facet>
+                                                    
+                                                    <a4j:commandLink action="#{backing_gestionarArchivos.abrir_directorio_action}"
+                                                                     execute="@this"
+                                                                     immediate="true"
+                                                                     disabled="#{row.tipo == 'A'}"
+                                                                     render="panelArchivos"
+                                                                     title="Haga click para visualizar el contenido.">
+                                                        <h:outputText value="#{row.nombre}" />
+                                                        <f:setPropertyActionListener target="#{gestionarArchivosBean.nomDir}" 
+                                                                                     value="#{row.nombre}"/>
+                                                    </a4j:commandLink>
+                                                    
+                                                </rich:column>
+
+                                                <rich:column style="text-align:right;">
+                                                    <f:facet name="header"><h:outputText value="Tamaño"/></f:facet>
+                                                    <h:outputText value="#{row.tamano}" />
+                                                </rich:column>
+
+                                                <rich:column>
+                                                    <f:facet name="header"><h:outputText value="Fecha Modif."/></f:facet>
+                                                    <h:outputText value="#{row.ultimaModif}">
+                                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                
+                                                <rich:column >
+                                                    <f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+                                                    
+                                                    <a4j:commandLink immediate="false" 
+                                                                     action="#{backing_gestionarArchivos.download_action}" 
+                                                                     execute="@this"
+                                                                     render="panelArchivos"
+                                                                     title="Descargar Archivo">
+                                                        <h:graphicImage url="/imagenes/icono_flecha_abajo.jpg" style="margin-left:5px;" />
+                                                        <f:setPropertyActionListener value="#{row.nombre}" target="#{gestionarArchivosBean.nomArchivo}"/>
+                                                    </a4j:commandLink>                                            
+                                                    
+                                                    <a4j:commandLink immediate="false" 
+                                                                   action="#{backing_gestionarArchivos.eliminar_action}" 
+                                                                   execute="@this"
+                                                                   render="panelArchivos"
+                                                                   title="Eliminar Archivo">
+                                                        <h:graphicImage url="/imagenes/rech.png" style="margin-left:5px;" />
+                                                        <f:setPropertyActionListener value="#{row.nombre}" target="#{gestionarArchivosBean.nomArchivo}"/>
+                                                    </a4j:commandLink>
+
+                                                </rich:column>
+                                                
+        
+                                            </rich:dataTable>
+                                    
+                                    
+                                    
+                                        </rich:panel>
+                                        
+                                        <rich:popupPanel id="uploadPanel" modal="false" resizeable="false" 
+                                                         domElementAttachment="form" width="430" height="200">
+                                            <f:facet name="header">
+                                                <h:outputText value="Subir archivo" />
+                                            </f:facet>
+                                            <f:facet name="controls">
+                                                <h:outputLink value="#" onclick="#{rich:component('uploadPanel')}.hide(); return false;">
+                                                    X
+                                                </h:outputLink>
+                                            </f:facet>
+                                            
+                                            <table cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                            <td>
+                                            <rich:fileUpload id="uploadFile" fileUploadListener="#{backing_gestionarArchivos.upload_listener}" 
+                                                listHeight="70"
+                                                maxFilesQuantity="1" style="height:70px;">
+                                                
+                                                <a4j:ajax event="uploadcomplete" 
+                                                execute="@form" 
+                                                render="panelArchivos"/>
+                                            </rich:fileUpload>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a4j:commandLink id="lnkAceptarUpload" execute="@this"
+                                                             action="#{backing_gestionarArchivos.lnkBuscar_action}" 
+                                                             render="panelArchivos" >
+                                                             <h:outputText value="Aceptar" />
+                                                    </a4j:commandLink>
+                                                </td>
+                                            </tr>
+                                            
+                                            </table>
+                                        </rich:popupPanel>                                        
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

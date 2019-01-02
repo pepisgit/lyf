@@ -1,0 +1,190 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+    <style>
+      #map_canvas {
+        width: 270px;
+        height: 200px;
+      }
+    </style>
+
+    <!--script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script-->
+    
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
+            type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
+            type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" >
+      function initMapa()
+      {
+        var platform = new H.service.Platform({
+            'app_id': 'zD7l0J9xw0v9MUkRvdMw',
+            'app_code': 'zFtlEyJYmOetUeYdqhu4-Q'
+        });
+        
+        // Obtain the default map types from the platform object:
+        var defaultLayers = platform.createDefaultLayers();
+        
+        // Instantiate (and display) a map object:
+        var map = new H.Map(
+          document.getElementById('map_canvas'),
+          defaultLayers.normal.map,
+          {
+            zoom: 16,
+            center: { lat: -31.401450, lng: -64.181501 }
+          });
+          
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+        
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);          
+          
+          
+        // Create a marker icon from an image URL:
+        var icon = new H.map.Icon('imagenes/marker.png');
+        
+        // Create a marker using the previously instantiated icon:
+        var marker = new H.map.Marker({ lat: -31.401450, lng: -64.181501 }, { icon: icon });
+        
+        // Add the marker to the map:
+        map.addObject(marker);
+      }
+    </script>
+    
+    <!--
+    <script>
+      function initialize() {
+        var map_canvas = document.getElementById('map_canvas');
+        var map_options = {
+          center: new google.maps.LatLng(-31.401450, -64.181501),
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+                
+
+        var map = new google.maps.Map(map_canvas, map_options)
+        var myLatlng = new google.maps.LatLng(-31.401450, -64.181501);
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title:"Club de Ajedrez Luz y Fuerza"
+        }); 
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    -->
+    
+    <table cellpadding="0" cellspacing="5">
+    <tr>
+    <td>
+        <rich:panel header="Login" rendered="#{not UserInfo.autenticado}">
+            <!--h:form-->
+              <table>
+                <tr>
+                    <td><h:outputText value="Usuario " /> </td>
+                    <td><h:inputText id="username" value="#{UserInfo.inputusuario}" styleClass="inputbox"/>
+                        <h:message for="username" styleClass="errors"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Password "/> </td>
+                    <td><h:inputSecret id="password" value="#{UserInfo.inputpassword}" styleClass="inputbox"/>
+                        <h:message for="password" styleClass="errors"/></td>
+                </tr>
+              </table>
+                
+                <center>
+                 <h:commandButton value="Login" action="#{UserInfo.authenticateUser}" styleClass="submitButton"/>
+                </center>
+            <!--/h:form-->
+        </rich:panel>
+        <rich:panel header="Bienvenido #{UserInfo.usuario.persona.per_nombres}" rendered="#{not empty UserInfo.usuario}">
+        <table cellpadding="0" cellspacing="0">
+            <a4j:repeat var="mnu" value="#{backingMain.menuUsuario}">
+                <tr>
+                    <td>
+                    
+                    <a href="#{mnu.mnu_url}">
+                    <h:outputText value="#{mnu.mnu_display}"/>
+                    </a>
+                    </td>
+                </tr>
+            </a4j:repeat>
+        </table>
+
+        </rich:panel>
+    </td>
+    </tr>
+
+    <tr>
+        <td>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td>
+                        <div id="map_canvas">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#D6D3E0" style="font-size:11px;font-family:Arial;font-weight:bold;padding-top:3px;padding-left:2px;">
+                        <h:outputText value="#{PageBean.direccionClub}" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+    </tr>
+
+    <tr>
+        <td width="100%">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td bgcolor="White">
+                        <h:graphicImage url="/imagenes/fb_logo.jpg" />
+                    </td>
+                    <td bgcolor="White" style="font-size:10px;font-family:Arial;">
+                        <table cellpadding="0" cellspacing="0" border="0" >
+                        <tr>
+                            <td><h:outputText value="Buscanos en Facebook"/></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.facebook.com/groups/171312706335911/" target="_blank">Grupo: Club de Ajedrez Luz y Fuerza</a></td>
+                        </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+        <!--iframe src="https://www.google.com/calendar/embed?title=Calendario%20del%20Club&amp;showPrint=0&amp;showTz=0&amp;mode=AGENDA&amp;height=200&amp;wkst=2&amp;bgcolor=%23999999&amp;src=ajedrezluzyfuerza%40gmail.com&amp;color=%232F6309&amp;ctz=America%2FArgentina%2FBuenos_Aires" style=" border:solid 1px #777 " width="255" height="200" frameborder="0" scrolling="no"></iframe-->
+    
+    <tr>
+    <td align="center" style="padding-top:10px;padding-bottom:15px;margin-top:5px;border:solid 1px #777;height:125px;" bgcolor="#CACCCF">
+        <p><b>Clases de Ajedrez</b></p>
+        <p><a href="clases.jsf"><img src="./imagenes/clases02.jpg" width="60%" height="60%"/></a></p>
+        
+    </td>
+    </tr>
+
+    <tr>
+    <td align="center" style="padding-top:5px;padding-bottom:5px;margin-top:5px;border:solid 1px #777;" bgcolor="#CACCCF">
+        <p>
+        <!--a href="grau.jsf"-->
+        <img src="./imagenes/grau_lateral.jpg" usemap="#mapaGrau"/>
+        <!--/a-->
+        </p>
+    </td>
+    </tr>
+
+    
+    </table>
+        <map id="mapaGrau">
+          <area shape="rect" coords="0,0,212,210" href="grau.jsf" target="_self" alt="Proyecto GRAU"></area>
+          <area shape="rect" coords="0,212,212,352" href="http://asociacioncordobesadeajedrez.blogspot.com.ar/" target="_blank" alt="ACDA"></area>
+        </map> 
+</ui:composition>

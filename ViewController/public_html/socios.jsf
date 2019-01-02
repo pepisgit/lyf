@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="socios" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top" >
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" valign="top" style="padding-top:5px;padding-right:10px;">
+                        
+                        <rich:panel header="Socios" >
+                            <h:outputText value="Esta sección contendrá la lista de nuestros Socios, y se implementará un sistema de gestión online para administrar los perfiles y las actividades del Club."/>
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

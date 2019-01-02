@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <style type="text/css">
+                .post img {border: none; padding: 0px; background-color: transparent;}
+                .ct-black-square{background-color:rgb(163,117,94);}
+                .ct-white-square{background-color:rgb(240,208,159);}
+                .ct-board-move-comment{color:rgb(39,99,148);}
+            </style>
+            <script type="text/javascript"  
+                src="http://chesstempo.com/js/pgnyui.js">  
+            </script>   
+            <script type="text/javascript"  
+                src="http://chesstempo.com/js/pgnviewer.js">  
+            </script>  
+            <link  
+             type="text/css"   
+             rel="stylesheet"   
+             href="http://chesstempo.com/css/board-min.css">  
+            </link>
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;height:100%;overflow:auto;">
+           <h:form id="frmPartidas" binding="#{backing_partidas.formPartidas}">
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="partidas" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+
+                        <h:inputHidden binding="#{backing_partidas.hdnInicial}"/>
+
+                        <rich:panel header="Partidas" id="panelPrincipal">
+                            <!--rich:panel title="Filtros" id="panelFiltros" >
+                                <table cellpadding="0" cellspacing="0" width="100%" border="0" >
+                                    <tr>
+                                        <td width="60%" height="100">
+                                            <h:outputText value="#{partidasBean.blancas}" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </rich:panel-->
+
+                            <rich:toolbar height="26" itemSeparator="grid" rendered="false">
+                                <rich:toolbarGroup>
+                                    <h:commandButton value="Subir partidas..." >
+                                        <rich:componentControl target="popup" operation="show" />
+                                    </h:commandButton>
+                                    
+                                    <a4j:commandButton value="Bajar todas las partidas"  actionListener="#{backing_partidas.bajarTodo_action}">
+                                    
+                                    </a4j:commandButton>
+
+                                    <a4j:commandButton value="Migrar cvs"  action="#{backing_partidas.migrar_action}">
+                                    
+                                    </a4j:commandButton>
+
+                                </rich:toolbarGroup>
+                            </rich:toolbar>
+
+                            <rich:popupPanel header="Visor" width="500" id="popupVisor" modal="false" autosized="true" resizeable="false" domElementAttachment="form">
+                                <f:facet name="header">
+                                    
+                                </f:facet>
+                                <f:facet name="controls">
+                                    <h:outputLink value="#" onclick="#{rich:component('popupVisor')}.hide(); return false;">
+                                        X
+                                    </h:outputLink>
+                                </f:facet>
+                                
+                                <rich:panel id="panelVisorPadre" >
+                                    <rich:panel  id="panelVisor" rendered="#{partidasBean.partidaVisor != null}">
+                                    
+                                    <table cellpadding="0" cellspacing="0" align="center">
+                                        <tr>
+                                            <td>
+                                            <h:outputText value="#{partidasBean.blancas} - #{partidasBean.negras}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <h:outputText value="#{partidasBean.resultado}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <script>
+                                            var mostrar = '#{partidasBean.partidaVisor != null? 'S':'N'}';
+                                            if (mostrar == 'S')
+                                            {
+                                                new PgnViewer( { boardName: "CerradoFinal", autoScrollMoves: true, newlineForEachMainMove: false, pgnString: '#{partidasBean.partidaVisor}' , pieceSize: 24, showCoordinates:0} );  
+                                            }
+                                    </script>
+            
+                                    <div id="CerradoFinal-container" align="center">
+                                    </div>
+                                    <div id="CerradoFinal-moves" style="background-color: #ededed; height: 100px; overflow: auto;">
+                                    </div>
+                                    <div style="clear: both; padding-bottom: 0.25em;">
+                                    </div>
+                                    </rich:panel>
+                                </rich:panel>
+                            </rich:popupPanel>
+                            
+                            <rich:popupPanel id="popup" modal="false" autosized="true" resizeable="false" domElementAttachment="form">
+                                <f:facet name="header">
+                                    <h:outputText value="Subir partidas" />
+                                </f:facet>
+                                <f:facet name="controls">
+                                    <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;">
+                                        X
+                                    </h:outputLink>
+                                </f:facet>
+                                
+                                <rich:fileUpload id="uploadPartidas" fileUploadListener="#{backing_partidas.subirPartidas_listener}" acceptedTypes="pgn"
+                                    ontyperejected="alert('Solo se aceptan archivos con extensión pgn');" maxFilesQuantity="1"
+                                    >
+                                    <a4j:ajax event="uploadcomplete" execute="@none" render="tblPartidas" />
+                                </rich:fileUpload>
+                                
+                            </rich:popupPanel>                            
+                            
+                            <rich:dataTable id="tblPartidas" rows="20" value="#{backing_partidas.partidasBasePgn}" var="row" style="width:720px;">
+                                <rich:column headerClass="estiloTest">
+                                    <f:facet name="header"><h:outputText value="Fecha"/></f:facet>
+                                    <h:outputText value="#{row.bpgn_date}">
+                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </rich:column>
+
+                                <rich:column width="350" style="width:350px;"
+                                             filterValue="#{partidasBean.filtroEvento}"
+                                             filterExpression="#{fn:containsIgnoreCase(row.bpgn_event, partidasBean.filtroEvento)}"
+                                             filterType="custom">
+                                    <f:facet name="header">
+                                        <h:panelGroup>
+                                            <table align="center" border="0" cellpadding="0" cellspacing="0">
+                                            
+                                            <tr><td>
+                                            <h:outputText value="Evento"/>
+                                            </td></tr>
+                                            
+                                            <tr><td align="center">
+                                            <h:selectOneMenu value="#{partidasBean.filtroEvento}">
+                                                <f:selectItems value="#{backing_partidas.itemsEventos}"/>
+                                                <a4j:ajax render="tblPartidas" execute="@this" event="change"/>
+                                            </h:selectOneMenu>                                            
+                                            </td></tr>
+                                            </table>
+                                        </h:panelGroup>
+                                    </f:facet>
+                                    <h:outputText value="#{row.bpgn_event}" />
+                                </rich:column>
+
+                                <rich:column style="width:150px;"
+                                             filterValue="#{partidasBean.filtroBlancas}"
+                                             filterExpression="#{fn:containsIgnoreCase(row.bpgn_white, partidasBean.filtroBlancas)}"
+                                             filterType="custom">
+                                    
+                                    <f:facet name="header">
+                                        <h:panelGroup>
+                                            <table align="center" border="0" cellpadding="0" cellspacing="0">
+                                            
+                                            <tr><td>
+                                            <h:outputText value="Blancas"/>
+                                            </td></tr>
+                                            
+                                            <tr><td align="center">
+                                            <h:selectOneMenu value="#{partidasBean.filtroBlancas}" style="width:110px;">
+                                                <f:selectItems value="#{backing_partidas.itemsBlancas}"/>
+                                                <a4j:ajax render="tblPartidas" execute="@this" event="change"/>
+                                            </h:selectOneMenu>
+                                            </td></tr>
+                                            </table>
+                                        </h:panelGroup>
+                                    </f:facet>
+                                    
+                                    <h:outputText value="#{row.bpgn_white}" />
+                                </rich:column>
+
+                                <rich:column style="width:150px;"
+                                             filterValue="#{partidasBean.filtroNegras}"
+                                             filterExpression="#{fn:containsIgnoreCase(row.bpgn_black, partidasBean.filtroNegras)}"
+                                             filterType="custom">
+                                    
+                                    <f:facet name="header">
+                                        <h:panelGroup>
+                                            <table align="center" border="0" cellpadding="0" cellspacing="0">
+                                            
+                                            <tr><td>
+                                            <h:outputText value="Negras"/>
+                                            </td></tr>
+                                            
+                                            <tr><td align="center">
+                                            <h:selectOneMenu value="#{partidasBean.filtroNegras}" style="width:110px;">
+                                                <f:selectItems value="#{backing_partidas.itemsNegras}"/>
+                                                <a4j:ajax render="tblPartidas" execute="@this" event="change"/>
+                                            </h:selectOneMenu>
+                                            </td></tr>
+                                            </table>
+                                        </h:panelGroup>
+                                    </f:facet>
+                                    
+                                    <h:outputText value="#{row.bpgn_black}" />
+                                </rich:column>
+
+                                <!--rich:column style="width:150px;">
+                                    <f:facet name="header"><h:outputText value="Negras"/></f:facet>
+                                    <h:outputText value="#{row.bpgn_black}" />
+                                </rich:column-->
+
+                                <rich:column style="width:150px;">
+                                    <f:facet name="header"><h:outputText value="Res."/></f:facet>
+                                    <h:outputText value="#{row.bpgn_result}" />
+                                </rich:column>
+                                
+                                <rich:column style="width:150px;">
+                                    <f:facet name="header"><h:outputText value="ECO"/></f:facet>
+                                    <h:outputText value="#{row.bpgn_eco}" />
+                                </rich:column>
+                                
+                                <rich:column style="width:100px;">
+                                    <f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+                                    
+                                    <a4j:commandLink immediate="false" styleClass="no-decor" execute="@this" render="panelVisorPadre" action="#{backing_partidas.verPartida_action}" 
+                                                     oncomplete="#{rich:component('popupVisor')}.show()">
+                                
+                                        <h:graphicImage id="imgVer" url="/imagenes/lupa2.png" height="16" width="16" style="margin-left:5px;" alt="Ver partida"/>
+                                         
+                                        <f:setPropertyActionListener target="#{partidasBean.partidaId}" value="#{row.bpgn_id}"/>
+                                        <f:setPropertyActionListener target="#{partidasBean.blancas}" value="#{row.bpgn_white}"/>
+                                        <f:setPropertyActionListener target="#{partidasBean.negras}" value="#{row.bpgn_black}"/>
+                                        <f:setPropertyActionListener target="#{partidasBean.resultado}" value="#{row.bpgn_result}"/>
+                                    
+
+                                    </a4j:commandLink>
+                                    
+                                    <h:commandLink immediate="false" styleClass="no-decor" action="#{backing_partidas.guardarPartida_action}" >
+                                        <h:graphicImage url="/imagenes/guardar.png" height="16" width="16" style="margin-left:5px;" alt="Descargar partida"/>
+                                        <f:setPropertyActionListener target="#{partidasBean.partidaPgn}" value="#{row.bpgn_pgn_text}"/>
+                                    </h:commandLink>
+                                
+                                </rich:column>
+                                
+                                
+                                <f:facet name="footer"> 
+                                    <rich:dataScroller fastControls="hide" />
+                                </f:facet>                                
+                            </rich:dataTable>
+                            
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

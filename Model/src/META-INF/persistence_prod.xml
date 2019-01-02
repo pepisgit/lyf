@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+  <persistence-unit name="clublyf_db"  >
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>    
+    <non-jta-data-source>java:comp/env/jdbc/ClublyfDS</non-jta-data-source>
+    <class>model.entities.Noticias</class>
+    <class>model.entities.Persona</class>
+    <class>model.entities.Socios</class>
+    <class>model.entities.Equipo</class>
+    <class>model.entities.Jugador</class>
+    <class>model.entities.JugadorEquipo</class>
+    <class>model.entities.Partida</class>
+    <class>model.entities.Ronda</class>
+    <class>model.entities.Torneo</class>
+    <class>model.entities.JugadorTorneo</class>
+    <class>model.entities.ResultadoTiebreak</class>
+    <class>model.entities.TiebreakTorneo</class>
+    <class>model.entities.TipoTieBreak</class>
+    <class>model.entities.BasePgn</class>
+    <class>model.entities.PremioTorneo</class>
+    <class>model.entities.Parametros</class>
+
+    <properties>
+      <property name="eclipselink.session.customizer" value="model.util.JPAEclipseLinkSessionCustomizer"/>
+      <property name="eclipselink.id-validation" value="NULL"/>
+      <property name="eclipselink.logging.level" value="FINEST"/> 
+      <property name="eclipselink.logging.parameters" value="true"/>
+      <property name="eclipselink.logging.logger" value="JavaLogger"/>
+      <property name="eclipselink.cache.shared.default" value="false"/>
+      <property name="eclipselink.cache.type.default" value="NONE"/>
+      
+      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
+    </properties>
+  </persistence-unit>
+
+</persistence>

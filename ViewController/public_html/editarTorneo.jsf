@@ -1,0 +1,572 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml" >
+        <h:head >
+            
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            
+            <script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript" src="./js/jQuery-Autocomplete-master/src/jquery.autocomplete.js" />
+            <script type="text/javascript" src="./js/editarTorneo.js"></script>
+            <style>
+            .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; font-family:Arial, Helvetica, sans-serif; font-size:12px;}
+            .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+            .autocomplete-selected { background: #CCCCCC; }
+            .autocomplete-suggestions strong { font-weight: normal; color: #3369FF; }
+            .autocomplete-group { padding: 2px 5px; }
+            .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+            </style>
+            
+        </h:head>
+        <h:body style="width:100%;margin:0 auto;" onload="iniciar()">
+           <h:form id="globalForm">
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="gestion" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="editarTorneoLateral.jsf"/>
+                        </td>
+
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+
+                        <rich:panel header="Editar Torneo" >
+                            
+                            <h:panelGrid id="statusMessages" columns="1">
+                                <rich:messages  id="messages1" showDetail="true" 
+                                                styleClass="messages" 
+                                                globalOnly="false" />
+                            </h:panelGrid>
+                            
+                            <rich:toolbar height="34" itemSeparator="line">
+                                <rich:toolbarGroup>
+                                    <h:commandButton id="btnGuardar" action="#{backing_editarTorneo.btnGuardar_action}" 
+                                                     value="Guardar" onclick="return cmdProcesar();"/>
+                                </rich:toolbarGroup>
+                                <rich:toolbarGroup>
+                                    <h:commandButton onclick="return confirm('Desea salir? Los datos no guardados se perderán.');"  action="#{backing_editarTorneo.btnSalir_action}" 
+                                                     value="Salir" />
+                                </rich:toolbarGroup>
+                                <rich:toolbarGroup location="right">
+                                    
+                                    <h:commandButton onclick="#{rich:component('chrPanel')}.show(); return false;"  value="Chess Results" />
+                                </rich:toolbarGroup>
+
+                            </rich:toolbar>
+                            
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td width="100%" style="padding-bottom:3px;padding-right:2px;">
+                                         <rich:panel title="Datos del Torneo" id="panelFiltros" style="background-color:#E3FEFF;">
+                                            <table cellpadding="0" cellspacing="0" width="100%" border="0" >
+                                                <tr>
+                                                    <td width="50%" style="padding-bottom:5px;" valign="top">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Nombre" />
+                                                                </td>
+                                                                <td>
+                                                                    <h:inputText value="#{editarTorneoBean.torneo.tor_nombre}" style="width:245px;" maxlength="50"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Organizador" />
+                                                                </td>
+                                                                <td>
+                                                                    <h:inputText value="#{editarTorneoBean.torneo.tor_organizador}" style="width:245px;" maxlength="50"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Lugar" />
+                                                                </td>
+                                                                <td>
+                                                                    <h:inputText value="#{editarTorneoBean.torneo.tor_lugar}" style="width:245px;" maxlength="50"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Arbitro" />
+                                                                </td>
+                                                                <td>
+                                                                    <h:inputText value="#{editarTorneoBean.torneo.tor_arbitro}" style="width:245px;" maxlength="50"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Fecha Inicio" />
+                                                                </td>
+                                                                <td>
+                                                                    <rich:calendar value="#{editarTorneoBean.torneo.tor_fecha_inicio}" datePattern="dd/MM/yyyy"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Tipo" />
+                                                                </td>
+                                                                <td align="left">
+                                                                    <rich:select enableManualInput="false" 
+                                                                                 value="#{editarTorneoBean.torneo.tor_tipo}">
+                                                                        <f:ajax event="selectitem" render="cmbCat" />
+                                                                        <f:selectItems value="#{backing_editarTorneo.listaTiposTorneo}" />
+                                                                    </rich:select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Categoría Ascenso" />
+                                                                </td>
+                                                                <td align="left">
+                                                                    <rich:select id="cmbCat"
+                                                                                 enableManualInput="false" 
+                                                                                 value="#{editarTorneoBean.torneo.tor_categoria_ascenso}" 
+                                                                                 style="width:65px;"
+                                                                                 disabled="#{editarTorneoBean.torneo.tor_tipo != 6}">
+                                                                        
+                                                                        <f:selectItems value="#{backing_editarTorneo.listaCatAscenso}" />
+
+                                                                        <rich:tooltip id="tt1" styleClass="tooltip" layout="block">
+                                                                            <span style="white-space: nowrap">Categoría a la que se asciende.</span>
+                                                                        </rich:tooltip>
+                                                                    </rich:select>
+                                                                </td>
+                                                            </tr>                                                            
+                                                        </table>
+                                                        
+                                                    </td>
+                                                    <td width="50%" style="padding-bottom:5px;" valign="top">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Ritmo" />
+                                                                </td>
+                                                                <td align="left">
+                                                                    <rich:select enableManualInput="false" value="#{editarTorneoBean.torneo.tor_ritmo_juego}">
+                                                                        <f:selectItems value="#{backing_editarTorneo.listaRitmos}" />
+                                                                    </rich:select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Sistema" />
+                                                                </td>
+                                                                <td align="left">
+                                                                    <rich:select enableManualInput="false" value="#{editarTorneoBean.torneo.tor_sistema}">
+                                                                        <f:selectItems value="#{backing_editarTorneo.listaSistemas}" />
+                                                                    </rich:select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Rondas" />
+                                                                </td>
+                                                                <td>
+                                                                    <h:inputText value="#{editarTorneoBean.torneo.tor_rondas}" style="width:45px;" maxlength="2">
+                                                                    </h:inputText>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="G.R.A.U." />
+                                                                </td>
+                                                                <td align="left">
+                                                                    <rich:select enableManualInput="false" value="#{editarTorneoBean.torneo.tor_rankeado}" style="width:65px;">
+                                                                        <f:selectItem itemValue="S" itemLabel="SI" />
+                                                                        <f:selectItem itemValue="N" itemLabel="NO" />
+                                                                    </rich:select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:outputText value="Observaciones" />
+                                                                </td>
+                                                                <td>
+                                                                    <h:inputTextarea rows="2" value="#{editarTorneoBean.torneo.tor_comentarios}" style="width:245px;" maxlength="500"/>
+                                                                </td>
+                                                            </tr>                                                            
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </rich:panel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-bottom:6px;" width="100%">
+                                        
+                                        <rich:collapsiblePanel id="lstJugadores" header="Lista de Jugadores" switchType="client" expanded="true">
+
+                                            <table cellpadding="5" cellspacing="0" >
+
+                                            <tr>
+                                            <td align="right">
+                                                <rich:panel >
+                                                    <table>
+                                                    <tr>
+                                                    <td align="right">
+                                                        <h:outputText value="Calcular Puntos" />
+                                                    </td>
+                                                    <td>
+                                                        <h:selectBooleanCheckbox id="chkCalcularPuntos" value="#{editarTorneoBean.procesoCalcularPuntos}" />
+                                                    </td>
+                                                    <td rowspan="2">
+                                                        <h:commandButton id="btnProcesarPuntaje" action="#{backing_editarTorneo.btnProcesarPuntaje_action}" 
+                                                                         onclick="return cmdProcesar();" value="Procesar" />
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td align="right">
+                                                        <h:outputText value="Ordenar Posiciones" />
+                                                    </td>
+                                                    <td>
+                                                        <h:selectBooleanCheckbox id="chkOrdenarPosiciones" value="#{editarTorneoBean.procesoOrdenarPosiciones}" />
+                                                    </td>
+                                                    </tr>
+                                                    </table>
+                                                </rich:panel>
+                                            </td>
+                                            </tr>
+
+                                            <tr><td align="center">
+                                            
+                                            
+                                            <rich:dataTable id="tblListaJugadores" rows="15" value="#{editarTorneoBean.listaJugadores}" 
+                                                            var="row" style="width:600px;">
+                                                            
+                                                <rich:column width="70" style="width:70px;" filterExpression="#{row.jugId != 0}">
+                                                    <f:facet name="header"><h:outputText value="Posición" /></f:facet>
+                                                    <h:outputText value="#{row.posicion}" />
+                                                </rich:column>
+
+                                                <rich:column width="320" style="width:320px;">
+                                                    <f:facet name="header"><h:outputText value="Apellido y Nombre" /></f:facet>
+                                                    <h:outputText value="#{row.apellidoNombre}" />
+                                                </rich:column>
+
+                                                <rich:column width="80" style="width:80px;text-align:right;">
+                                                    <f:facet name="header"><h:outputText value="G.R.A.U." /></f:facet>
+                                                    <h:outputText value="#{row.grauActual}" />
+                                                </rich:column>
+                                                
+                                                <rich:column width="80" style="width:80px;text-align:center;">
+                                                    <f:facet name="header"><h:outputText value="Puntos" /></f:facet>
+                                                    <h:inputText value="#{row.puntaje}" style="width:40px;text-align:right;" 
+                                                                 onkeypress="handleKeyPressPuntaje(event, this);">
+                                                        <f:convertNumber pattern="##0.0" />
+                                                    </h:inputText>
+                                                </rich:column>
+
+                                                <rich:column width="80" style="width:80px;text-align: center;">
+                                                    <f:facet name="header"><h:outputText value="Clasifica" /></f:facet>
+                                                    <h:selectBooleanCheckbox  value="#{row.clasifica}" disabled="#{editarTorneoBean.torneo.tor_tipo != 3 &amp;&amp; editarTorneoBean.torneo.tor_tipo != 7}" />
+                                                </rich:column>
+                                                
+                                                <rich:column style="width:20px;">
+                                                    <f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+                                                    <a4j:commandLink action="#{backing_editarTorneo.quitarJugador_action}" title="Quitar de la Lista de Jugadores"
+                                                                     render="lstJugadores,tblJugadores">
+                                                        <h:graphicImage id="imgVer" url="/imagenes/rech.png" height="10" width="9" style="margin-left:5px;" alt="Quitar de la Lista de Jugadores"/>
+                                                        <f:setPropertyActionListener target="#{editarTorneoBean.jugadorSeleccionado}" value="#{row}"/>
+                                                    </a4j:commandLink>
+                                                    <a4j:commandLink action="#{backing_editarTorneo.subirJugador_action}" title="Subir puesto"
+                                                                     render="lstJugadores,tblJugadores">
+                                                        <h:graphicImage id="imgSub" url="/imagenes/icono_flecha_arriba.jpg" height="10" width="9" style="margin-left:5px;" alt="Subir puesto"/>
+                                                        <f:setPropertyActionListener target="#{editarTorneoBean.jugadorSeleccionado}" value="#{row}"/>
+                                                    </a4j:commandLink>
+                                                    <a4j:commandLink action="#{backing_editarTorneo.bajarJugador_action}" title="Bajar puesto"
+                                                                     render="lstJugadores,tblJugadores">
+                                                        <h:graphicImage id="imgBaj" url="/imagenes/icono_flecha_abajo.jpg" height="10" width="9" style="margin-left:5px;" alt="Bajar puesto"/>
+                                                        <f:setPropertyActionListener target="#{editarTorneoBean.jugadorSeleccionado}" value="#{row}"/>
+                                                    </a4j:commandLink>  
+                                                </rich:column>
+                            
+                                                <f:facet name="footer"> 
+                                                    <rich:dataScroller  maxPages="3" fastControls="hide" />
+                                                </f:facet>
+                                            </rich:dataTable>                                            
+                                            
+                                            </td>
+                                            </tr>
+                                            </table>
+                                        </rich:collapsiblePanel>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-bottom:6px;">
+                                        <rich:collapsiblePanel header="Rondas / Partidas" switchType="client" expanded="true">
+                                            
+                                            <table cellpadding="5" cellspacing="0" >
+
+                                            <tr>
+                                            <td align="right">
+                                                <rich:panel>
+                                                    <h:outputLabel value="Colores Blanco/Negro correctos" for="chkbnok" />
+                                                    <h:selectBooleanCheckbox id="chkbnok" value="#{editarTorneoBean.torneo.torbnok}" />
+                                                </rich:panel>
+                                            </td>
+                                            </tr>
+
+                                            <tr><td align="center">
+                                            <table>
+                                            
+                                            <rich:dataTable id="tblRondas" rows="100" value="#{editarTorneoBean.rondasdto}" 
+                                                            var="rda" style="width:600px;" >
+                                                <rich:column colspan="5">
+                                                    <rich:collapsibleSubTableToggler for="sbtbl" />
+                                                    <table cellpadding="0" cellspacing="0" align="right">
+                                                    <tr>
+                                                        <td><h:outputText value="Ronda #{rda.ronda.ron_numero}" style="font-weight:bold;"/></td>
+                                                        
+                                                        <td><h:outputText value="- Fecha:" style="padding-left:8px;"/></td>
+                                                        
+                                                        <td style="padding-left:8px;">
+                                                        <h:inputText value="#{rda.ronda.ron_fecha}" size="10">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                                                        </h:inputText>
+                                                        </td>
+                                                        
+                                                        <td style="padding-left:200px;">
+                                                        <a4j:commandLink action="#{backing_editarTorneo.quitarRonda_action}" title="Quitar esta ronda"
+                                                                         render="tblRondas">
+                                                            <h:graphicImage id="imgVer" url="/imagenes/rech.png" height="10" width="9" style="margin-left:5px;" alt="Quitar esta ronda"/>
+                                                            <f:setPropertyActionListener target="#{editarTorneoBean.rondaSeleccionada}" value="#{rda}"/>
+                                                        </a4j:commandLink>
+                                                        </td>
+                                                    </tr>
+                                                    </table>
+                                                </rich:column>
+                                                
+                                                <rich:collapsibleSubTable value="#{rda.listaPartidas}" var="item" id="sbtbl" expandMode="client" expanded="#{rda.expanded}">
+                                                    <f:facet name="header">
+                                                        <rich:columnGroup>
+                                                            <rich:column>
+                                                                <h:outputText value="Blancas" />
+                                                            </rich:column>
+                                                            <rich:column>
+                                                                <h:outputText value="" />
+                                                            </rich:column>
+                                                            <rich:column>
+                                                                <h:outputText value="" />
+                                                            </rich:column>
+                                                            <rich:column>
+                                                                <h:outputText value="Negras" />
+                                                            </rich:column>
+                                                            <rich:column>
+                                                                <h:outputText value="Acciones" />
+                                                            </rich:column>
+                                                        </rich:columnGroup>
+                                                    </f:facet>
+                                                    <rich:column style="width:180px;text-align: right;outline: none;">
+                                                        <h:inputText id="txtJugBlancas" value="#{item.partida.nombreJugadorBlancas}" onfocus="this.select()"
+                                                                     autocomplete="off"/>
+                                                        <h:inputHidden id="hdnJugBlancas" value="#{item.partida.par_jug_blancas}" />
+                                                    </rich:column>
+                                                    <rich:column style="width:40px;text-align: center;">
+                                                        <h:inputText id="txtResultBlancas" value="#{item.partida.strResultBlancas}" 
+                                                                     onfocus="this.select()" onkeypress="handleKeyPressResultado(event, this);"
+                                                                     maxlength="3" style="width:25px;text-align: center;outline: none;"
+                                                                     autocomplete="off"/>
+                                                        <h:inputHidden id="hdnTipoResultBlancas" value="#{item.partida.par_tipo_res_blancas}" />
+                                                        <h:inputHidden id="hdnResultBlancas" value="#{item.partida.par_resultado_blancas}"/>
+                                                    </rich:column>
+                                                    <rich:column style="width:40px;text-align: center;outline: none;">
+                                                        <h:inputText id="txtResultNegras" value="#{item.partida.strResultNegras}" 
+                                                                     onfocus="this.select()" onkeypress="handleKeyPressResultado(event, this);"
+                                                                     maxlength="3" style="width:25px;text-align: center;outline: none;"
+                                                                     autocomplete="off"/>
+                                                        <h:inputHidden id="hdnTipoResultNegras" value="#{item.partida.par_tipo_res_negras}" />
+                                                        <h:inputHidden id="hdnResultNegras" value="#{item.partida.par_resultado_negras}"/>
+                                                    </rich:column>
+                                                    <rich:column style="width:180px;">
+                                                        <h:inputText id="txtJugNegras" value="#{item.partida.nombreJugadorNegras}" onfocus="this.select()"
+                                                                     autocomplete="off"/>
+                                                        <h:inputHidden id="hdnJugNegras" value="#{item.partida.par_jug_negras}" />
+                                                    </rich:column>
+                                                    <rich:column style="width:20px;">
+                                                        <!--f:facet name="header"><h:outputText value="Acciones"/></f:facet-->
+                                                        <a4j:commandLink action="#{backing_editarTorneo.quitarPartida_action}" title="Quitar esta partida"
+                                                                         render="tblRondas" onclick="return confirm('¿Está seguro que desea eliminar esta partida?');"
+                                                                         oncomplete="iniciar();">
+                                                            <h:graphicImage id="imgVer" url="/imagenes/eliminar_1.jpg" height="10" width="9" style="margin-left:5px;" alt="Quitar esta partida"/>
+                                                            <f:setPropertyActionListener target="#{editarTorneoBean.partidaSeleccionada}" value="#{item}"/>
+                                                            <f:setPropertyActionListener target="#{editarTorneoBean.rondaSeleccionada}" value="#{rda}"/>
+                                                        </a4j:commandLink>
+                                                    </rich:column>
+                                                    
+                                                    <f:facet name="footer">
+
+                                                        <a4j:commandLink title="Nueva Partida"
+                                                                         action="#{backing_editarTorneo.nuevaPartida_action}" 
+                                                                         render="tblRondas" oncomplete="iniciar();">
+                                                            <h:outputText value="Nueva Partida" />
+                                                            <f:setPropertyActionListener target="#{editarTorneoBean.rondaSeleccionada}" value="#{rda}"/>
+                                                        </a4j:commandLink>
+                                                        
+                                                    </f:facet>
+                                                </rich:collapsibleSubTable>
+
+                                            </rich:dataTable>                                            
+                                            
+                                            </table>
+                                            </td></tr>
+                                            
+                                            <tr>
+                                            <td align="left">
+                                                <table cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td>
+                                                    <h:commandLink value="Nueva Ronda" 
+                                                                   action="#{backing_editarTorneo.nuevaRonda_action}"
+                                                                   render="tblPartidas" oncomplete="iniciar();"/>
+                                                    </td>
+                                                    
+                                                    <td align="right" style="padding-left:5px;">
+                                                        <h:inputText binding="#{backing_editarTorneo.txtCantidadPartidasAgregar}" style="width:50px;"/>
+                                                    </td>
+                                                    
+                                                    <td align="left" style="padding-left:5px;">
+                                                        <h:outputText value="partidas." />
+                                                    </td>
+                                                </tr>
+                                                </table>
+                                            </td>
+                                            </tr>
+                                            
+                                            </table>
+                                        </rich:collapsiblePanel>
+                                        
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </rich:panel>
+                        
+                        
+                        <!-- CHESS RESULTS -->
+                        
+                        <rich:popupPanel id="chrPanel" modal="false" resizeable="false" 
+                                         domElementAttachment="form" 
+                                         width="700" height="600" 
+                                         left="300" top="20">
+                            <f:facet name="header">
+                                <h:outputText value="ChessResults" />
+                            </f:facet>
+                            <f:facet name="controls">
+                                <h:outputLink value="#" onclick="#{rich:component('chrPanel')}.hide();">
+                                    X
+                                </h:outputLink>
+                            </f:facet>
+                            
+                            <table border="0" cellpadding="0" cellspacing="5" width="100%"
+                                   align="center">
+                                <tr>
+                                <td>
+                                    <rich:panel>
+                                        <table cellpadding="5" cellspacing="0" 
+                                               width="100%" border="0" align="center" >
+                                            <tr>
+                                                <td align="right">
+                                                    <h:outputText value="ID Torneo:" />
+                                                </td>
+                                                <td align="left" style="width:110px;">
+                                                    <h:inputText id="txtIdChessResults" 
+                                                                 value="#{editarTorneoBean.idChessResults}" 
+                                                                 style="width:100px;"
+                                                                 autocomplete="off"/>
+                                                </td>
+                                                <td align="left">
+
+                                                    <a4j:commandButton id="btnProcesarCR" 
+                                                                     action="#{backing_editarTorneo.btnProcesarCR_action}"
+                                                                     value="Procesar" 
+                                                                     render="tblJugadoresCR,nomTorneoCR" 
+                                                                     oncomplete="iniciarAutosugestCR();"
+                                                                     />
+                                                
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </rich:panel>
+                                </td>
+                                </tr>
+                                
+                                <tr>
+                                <td align="center" >
+                                    <b><h:inputText id="nomTorneoCR" value="#{editarTorneoBean.torneoChessResults.nombreTorneo}" 
+                                                    readonly="true"
+                                                    style="width:100%;text-align:center;"/></b>
+                                </td>
+                                </tr>
+                                
+                                <tr>
+                                <td align="center">
+                                    <rich:panel>
+                                        <rich:dataTable id="tblJugadoresCR"
+                                                        value="#{editarTorneoBean.torneoChessResults.listaJugadores}" 
+                                                        var="row" style="width:400px;">
+        
+                                            <rich:column width="300" style="width:300px;">
+                                                <f:facet name="header"><h:outputText value="Nombre en ChessResults" /></f:facet>
+                                                <h:outputText value="#{row.jugNombre}" />
+                                            </rich:column>
+                                            
+                                            <rich:column width="50" style="width:50px;">
+                                                <f:facet name="header"><h:outputText value="ID" /></f:facet>
+                                                <h:outputText id="idsJugadorCR" value="#{row.jugSistemaId}" />
+                                            </rich:column>
+                                            
+                                            <rich:column width="300" style="width:300px;">
+                                                <f:facet name="header"><h:outputText value="Jugador en Sistema" /></f:facet>
+                                                
+                                                <h:inputText id="txtJugadorCR" value="#{row.jugSistemaNombre}" onfocus="this.select()"
+                                                             autocomplete="off"/>
+                                                <h:inputHidden id="hdnJugadorCR" value="#{row.jugSistemaId}" />
+                                                
+                                            </rich:column>
+                                            
+                                            <rich:column width="100" style="width:100px;">
+                                                <f:facet name="header"><h:outputText value="Acciones" /></f:facet>
+                                                    <a4j:commandLink onclick="#{rich:component('newPanel')}.show(); return false;">
+                                                      <h:graphicImage url="/imagenes/nuevo.png" height="16" width="16" alt="Nuevo Jugador"/>
+                                                    </a4j:commandLink>   
+                                            </rich:column>
+                                            
+                                        </rich:dataTable>
+                                    </rich:panel>
+                                </td>
+                                </tr>
+                                
+                                <tr>
+                                <td align="center">
+                                    <a4j:commandButton action="#{backing_editarTorneo.cargarTorneoCR}" 
+                                                       value="Aceptar"
+                                                       render="lstJugadores,tblJugadores,tblRondas,panelFiltros"
+                                                       onclick="#{rich:component('chrPanel')}.hide(); return true;">
+                                    </a4j:commandButton>
+                                </td>
+                                </tr>
+                                
+                            </table>
+                        </rich:popupPanel>                        
+                        
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="nosotros" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+                        
+                        <rich:panel header="Nosotros" >
+                            <p align="justify"><strong>&iquest;Qui&eacute;nes somos?</strong></p>
+                  <p align="justify"><br/>Somos un grupo de un grupo de ajedrecistas que, ante la falta de una actividad oficial constante, a principios de 2007 decidimos generar un espacio para el jugador de ajedrez en C&oacute;rdoba. A partir de nuestra iniciativa, y con el apoyo de la Asociaci&oacute;n de Entidades de Ajedrez de la Ciudad de C&oacute;rdoba y del Sindicato de Luz y Fuerza, en enero del 2007 vio la luz el <strong>Club de Ajedrez Luz y Fuerza</strong>. Entidad a trav&eacute;s de la cual buscamos generar actividad oficial (tanto a nivel local como nacional) de calidad y sostenida en el tiempo que le permita al jugador de ajedrez - tanto federado como aficionado - desarrollar su actividad y progresar en la misma.
+                  </p>
+                  <table align="center">
+                  	<tr>
+                    	<td align="center">
+                        	<table>
+                            	<tr>
+                                	<td id="imagen001">
+                                   	  <img src="imagenes/nosotros_archivos/foto01.jpg"/>
+                                    </td>
+                                </tr>
+                                <tr id="comentario001">
+                                	<td class="Estilo2" align="center">Amplio sal&oacute;n donde el Club desarrolla sus actividades.</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                  	<tr>
+                    	<td align="center">
+                        	<table>
+                            	<tr>
+                                	<td id="imagen001">
+                                   	  <img src="imagenes/nosotros_archivos/salon_club.jpg"/>
+                                    </td>
+                                </tr>
+                                <tr id="comentario001">
+                                	<td class="Estilo2" align="center">Nuestra convicatoria, en una sola imagen.</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                  </table>
+
+                  <p align="justify">&nbsp;</p>
+                  <p align="justify"><strong>Nuestro proyecto y nuestro trayecto</strong></p>
+                  <p align="justify"><br/>Un club que complemente las actividades de las escuelas de ajedrez en general y la Escuela de Ajedrez de Luz y Fuerza en particular. Un lugar con actividad, calidad y continuidad que posibilite el desarrollo de ajedrecistas aficionados y jugadores de categor&iacute;a.</p>
+                  <table align="center">
+                  	<tr>
+                    	<td align="center">
+                        	<table>
+                            	<tr>
+                                	<td id="imagen001">
+                                   	  <img src="imagenes/nosotros_archivos/comision.jpg"/>
+                                    </td>
+                                </tr>
+                                <tr id="comentario001">
+                                	<td class="Estilo2" align="center">Reuni&oacute;n de la Comisi&oacute;n Directiva</td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                    </tr>
+                    </table>
+
+                  <p align="left"><strong>Nuestro sue&ntilde;o</strong></p>
+                  
+           
+                  <p><br/>Seguir construyendo desde el espacio del Sindicato de Luz y Fuerza la historia, el presente y el futuro del ajedrez Cordob&eacute;s.</p>
+                  <p>
+                  </p>
+                  <table align="center">
+                  	<tr>
+                    	<td align="center">
+                        	<table>
+                            	<tr>
+                                	<td id="imagen001">
+                                   	  <img src="imagenes/nosotros_archivos/foto03.jpg"/>
+                                    </td>
+                                </tr>
+                                <tr id="comentario001">
+                                	<td class="Estilo2" align="center">Miembros del Club en su encuentro con el equipo de Sierras Chicas</td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                    </tr>
+                    </table>
+                        <p align="center">
+                        <br/>
+                        <strong>Comisi&oacute;n Directiva del Club de Ajedrez Luz y Fuerza</strong>
+                        <br/>
+                        <table width="483" border="1" align="center" cellspacing="0">
+                          <tr>
+                            <td width="128">Presidente</td>
+                            <td width="345">Nicol&aacute;s Fortunato</td>
+                          </tr>
+                          <tr>
+                            <td>Vicepresidente</td>
+                            <td>Luis C&aacute;serez</td>
+                          </tr>
+                          <tr>
+                            <td>Secretario</td>
+                            <td>Gast&oacute;n Moisset</td>
+                          </tr>
+                          <tr>
+                            <td>Pro Secretario</td>
+                            <td>Milagros Brizzi</td>
+                          </tr>
+                          <tr>
+                            <td>Tesorero</td>
+                            <td>Jos&eacute; Pellitteri</td>
+                          </tr>
+                          <tr>
+                            <td>Pro-Tesorero</td>
+                            <td>Sonia Cristori</td>
+                          </tr>
+                          <tr>
+                            <td>1&#186; Vocal</td>
+                            <td>Roque Cerda</td>
+                          </tr>
+                          <tr>
+                            <td>2&#186; Vocal</td>
+                            <td>Carlos Tornquist</td>
+                          </tr>
+                          <tr>
+                            <td>3&#186; Vocal</td>
+                            <td>Jos&eacute; Ortiz</td>
+                          </tr>
+                          
+                        </table>
+                        
+                        </p>
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>
+    

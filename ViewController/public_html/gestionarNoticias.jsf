@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <script>
+            window.CKEDITOR_BASEPATH = '#{request.contextPath}/org.richfaces.resources/javax.faces.resource/org.richfaces.ckeditor/';
+            </script>
+            
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="gestion" />
+            </ui:include>
+            
+            <h:form>
+            <div id="contenido" align="center">
+                <table id="tablaprincipal" width="100%">
+
+                    <tr>
+                        <td height="600" width="272" align="center" id="celdaLateral">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        
+                        <td width="747" style="padding-top:5px;padding-right:10px;" id="celdaPrincipal">
+                            <rich:panel header="Gestionar Noticias" >
+
+                                    <rich:toolbar height="26" itemSeparator="grid">
+                                        <rich:toolbarGroup>
+                                           <h:commandLink action="#{backingGestionarNoticias.nuevaNoticia_action}"
+                                                          immediate="true" title="Nueva Noticia">
+                                              <h:graphicImage url="/imagenes/nuevo.png" height="16" width="16" alt="Nuevo"/>
+                                           </h:commandLink> 
+                                        </rich:toolbarGroup>
+                                    </rich:toolbar>
+                                    <rich:dataTable  rows="15" value="#{backingGestionarNoticias.noticiasUsuario}" var="row" style="width:100%">
+                                        <rich:column headerClass="estiloTest">
+                                            <f:facet name="header"><h:outputText value="Fecha alta"/></f:facet>
+                                            <h:outputText value="#{row.not_fecha_alta}">
+                                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                        </rich:column>
+
+                                        <rich:column width="350" style="width:430px;" >
+                                            <f:facet name="header"><h:outputText value="Titulo"/></f:facet>
+                                            <h:outputText value="#{row.not_titulo}"  escape="false"/>
+                                        </rich:column>
+
+                                        <rich:column style="width:70px;text-align:center;">
+                                            <f:facet name="header"><h:outputText value="Usuario"/></f:facet>
+                                            <h:outputText value="#{row.nomUsuario}" />
+                                        </rich:column>
+
+                                        <rich:column style="width:70px; text-align:center;" >
+                                            <f:facet name="header"><h:outputText value="Estado"/></f:facet>
+                                            
+                                            <h:commandLink rendered="#{row.not_activa == 'S'}"
+                                                           immediate="false" 
+                                                           title="Pasar a Borrador" style="color:#57A247;"
+                                                           onclick="return confirm('¿Está seguro que desea pasar a borrador esta noticia?');"
+                                                           action="#{backingGestionarNoticias.desactivarNoticia_action}" >
+                                                <h:outputText value="Activa" style="color:#57A247;"/>
+                                                <f:setPropertyActionListener target="#{editarNoticiasBean.idNoticia}" value="#{row.not_id}"/>
+                                            </h:commandLink>
+                                            <h:commandLink rendered="#{row.not_activa != 'S'}"
+                                                           immediate="false" style="color:#FFA613;"
+                                                           title="Publicar Noticia"
+                                                           onclick="return confirm('¿Está seguro que desea pasar publicar esta noticia?');"
+                                                           action="#{backingGestionarNoticias.activarNoticia_action}" >
+                                                <h:outputText value="Borrador" style="color:#FFA613;"/>
+                                                <f:setPropertyActionListener target="#{editarNoticiasBean.idNoticia}" value="#{row.not_id}"/>
+                                            </h:commandLink>
+
+                                        </rich:column>
+
+                                        <rich:column style="width:100px;">
+                                            <f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+                                            
+                                            <h:commandLink immediate="false" action="#{backingGestionarNoticias.editarNoticia_action}" title="Editar Noticia">
+                                                <h:graphicImage url="/imagenes/icono-lapiz.jpg" height="17" width="18" style="margin-left:5px;" />
+                                                <f:setPropertyActionListener target="#{editarNoticiasBean.idNoticia}" value="#{row.not_id}"/>
+                                            </h:commandLink>                                            
+                                            
+                                            <h:commandLink rendered="#{backingGestionarNoticias.habilitaDepuracion == 'S'}"
+                                                           immediate="false" action="#{backingGestionarNoticias.depurarNoticia_action}" >
+                                                <h:graphicImage url="/imagenes/icono01.png" height="17" width="18" style="margin-left:5px;" />
+                                                <f:setPropertyActionListener target="#{editarNoticiasBean.idNoticia}" value="#{row.not_id}"/>
+                                            </h:commandLink>
+                                            
+                                            <!--h:graphicImage url="/imagenes/lupa2.png" height="16" width="16" style="margin-left:5px;"/-->
+                                            <h:commandLink immediate="false" action="#{backingGestionarNoticias.eliminarNoticia_action}" title="Eliminar Noticia"
+                                                           onclick="return confirm('¿Está seguro que desea eliminar esta noticia?');">
+                                                <h:graphicImage url="/imagenes/rech.png" height="17" width="18" style="margin-left:5px;" />
+                                                <f:setPropertyActionListener target="#{editarNoticiasBean.idNoticia}" value="#{row.not_id}"/>
+                                            </h:commandLink>
+
+                                        </rich:column>
+                                        <f:facet name="footer"> 
+                                            <rich:dataScroller fastControls="hide"  />
+                                        </f:facet>
+                                    </rich:dataTable>
+                                    
+                            </rich:panel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>

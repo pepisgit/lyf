@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <style>
+                .anchoColumna {250px;}
+            </style>
+            
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;height:100%;overflow:auto;">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="torneos" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+
+                        <rich:panel header="Torneos" id="panelPrincipal">
+                            <!--rich:panel title="Filtros" id="panelFiltros" >
+                                <table cellpadding="0" cellspacing="0" width="100%" border="0" >
+                                    <tr>
+                                        <td width="60%" height="100">
+                                            <h:outputText value="..." />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </rich:panel-->
+                            <h:panelGrid id="statusMessages" columns="1">
+                                <rich:messages  id="messages1" showDetail="true" 
+                                                styleClass="messages" 
+                                                globalOnly="false" />
+                            </h:panelGrid>
+                            <rich:toolbar height="26" itemSeparator="grid" rendered="#{backing_torneos.habilitaCargaTorneos == 'S'}">
+                                <rich:toolbarGroup>
+                                   <h:commandLink action="#{backing_torneos.nuevoTorneo_action}"
+                                                  immediate="true">
+                                      <h:graphicImage url="/imagenes/nuevo.png" height="16" width="16" alt="Nuevo"/>
+                                   </h:commandLink> 
+                                </rich:toolbarGroup>
+                            </rich:toolbar>
+
+                            <rich:dataTable id="tblTorneos" rows="20" value="#{backing_torneos.listaTorneos}" var="row" style="width:720px;">
+                                <rich:column headerClass="estiloTest">
+                                    <f:facet name="header"><h:outputText value="Fecha"/></f:facet>
+                                    <h:outputText value="#{row.tor_fecha_inicio}" >
+                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </rich:column>
+
+                                <rich:column width="500" style="width:650px;">
+                                    <f:facet name="header"><h:outputText value="Descripción" /></f:facet>
+                                    <h:outputText value="#{row.tor_nombre}" style="font-weight:bold;color:#3C1FAD;"/>
+                                </rich:column>
+
+                                <rich:column width="300" style="width:300px;" >
+                                    <f:facet name="header"><h:outputText value="Tipo de Torneo"/></f:facet>
+                                    <h:outputText value="#{row.tipoTorneo}" />
+                                </rich:column>
+
+                                <rich:column style="width:150px;">
+                                    <f:facet name="header"><h:outputText value="Sistema"/></f:facet>
+                                    <h:outputText value="#{row.sistema}" />
+                                </rich:column>
+
+                                <rich:column style="width:100px;">
+                                    <f:facet name="header"><h:outputText value="Rondas"/></f:facet>
+                                    <h:outputText value="#{row.tor_rondas}" />
+                                </rich:column>
+                                
+                                <rich:column style="width:20px;">
+                                    <f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+                                    <h:commandLink action="#{backing_torneos.verTorneo_action}">
+                                        <h:graphicImage id="imgVer" url="/imagenes/lupa2.png" height="16" width="16" style="margin-left:5px;" />
+                                        <f:setPropertyActionListener target="#{detalleTorneoBean.torneo}" value="#{row}"/>
+                                    </h:commandLink>
+                                    <h:commandLink action="#{backing_torneos.modificarTorneo_action}" rendered="#{backing_torneos.habilitaCargaTorneos == 'S'}">
+                                        <h:graphicImage id="imgModif" url="/imagenes/icono-lapiz.jpg" height="16" width="16" style="margin-left:5px;" />
+                                        <f:setPropertyActionListener target="#{editarTorneoBean.torneo}" value="#{row}"/>
+                                    </h:commandLink>
+                                </rich:column>
+
+                                <f:facet name="footer"> 
+                                    <rich:dataScroller fastControls="hide" />
+                                </f:facet>                                
+                            </rich:dataTable>
+                            
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

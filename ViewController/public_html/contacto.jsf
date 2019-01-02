@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <script>
+                function frmContacto(d, t){
+                   var g = d.createElement(t),
+                       s = d.getElementsByTagName(t)[0];
+                   g.src = 'http://es.foxyform.com/js.php?id=270423&amp;sec_hash=b0dbe4b18c4&amp;width=450px';
+                   s.parentNode.insertBefore(g, s);
+                }
+                function inicializarFrm(){
+                    myframe = document.getElementsByTagName('iframe');
+                    myframe[1].style.height = '400px';
+                }
+             </script>
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;" onload="inicializarFrm();">
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="contacto" />
+            </ui:include>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top">
+                        
+                        <rich:panel header="Contacto" >
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr>
+                                    <td align="center" style="font-size:12px;">
+                                        Utiliza el formulario para mandar tu mensaje, o envianos un e-mail a <a href="mailto:clubdeajedrezluzyfuerza@gmail.com" target="_blank">clubdeajedrezluzyfuerza@gmail.com</a>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-top:30px;">
+                                        <a id="foxyform_embed_link_270423" href="http://es.foxyform.com/">foxyform</a>
+                                        <script type="text/javascript">
+                                            frmContacto(document, 'script');
+                                        </script>
+                                    </td>
+                                </tr>
+                            </table>
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>

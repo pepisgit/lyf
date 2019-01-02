@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;height:100%;overflow:auto;">
+            
+            <div id="fb-root"></div>
+            <script type="text/javascript">
+              window.fbAsyncInit = function() {
+                // init the FB JS SDK
+                FB.init({
+                  appId      : '298714406899366', // App ID from the App Dashboard
+                  channelUrl : '//www.ajedrezpensado.com.ar/channel.html', // Channel File for x-domain communication
+                  status     : true, // check the login status upon init?
+                  cookie     : true, // set sessions cookies to allow your server to access the session?
+                  xfbml      : true  // parse XFBML tags on this page?
+                });
+            
+                // Additional initialization code such as adding Event Listeners goes here
+            
+              };
+            
+              // Load the SDK's source Asynchronously
+              (function(d, debug){
+                 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                 if (d.getElementById(id)) {return;}
+                 js = d.createElement('script'); js.id = id; js.async = true;
+                 js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+                 ref.parentNode.insertBefore(js, ref);
+               }(document, /*debug*/ false));
+            </script>
+            
+            <script type="text/javascript">(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&amp;appId=298714406899366";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            
+            <h:form>
+            <ui:include src="menu.jsf"/>
+            
+            <div id="contenido" align="center">
+                <table id="tablaprincipal" width="100%">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" valign="top" style="padding-top:5px;padding-right:10px;">                
+                            <rich:panel header="Noticias" >
+                                <table cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                <td align="right" style="padding-bottom:5px;">
+                                    <a4j:commandLink  value="volver" action="main">
+                                    </a4j:commandLink>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>
+                                <div id="frmNoticia">
+                                    <h:outputText escape="false" value="#{backingNoticia.noticiaActual}"/>
+                                </div>
+                                <a4j:outputPanel rendered="#{PageBean.showFacebookComments == 'S'}">
+                                    <h:outputText escape="false" value="#{backingNoticia.facebookCommentDiv}"/>
+                                </a4j:outputPanel>
+                                </td>
+                                </tr>
+                                
+                                </table>
+
+                            </rich:panel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>

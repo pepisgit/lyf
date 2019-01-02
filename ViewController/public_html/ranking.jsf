@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" 
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j">
+    <html lang="es" style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
+        <h:head >
+            <title>Club de Ajedrez Luz y Fuerza</title>
+            
+            <script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript" src="./js/jplot/jquery.jqplot.js"></script>
+            <script type="text/javascript" src="./js/jplot/plugins/jqplot.dateAxisRenderer.js"></script>
+            <script type="text/javascript" src="./js/jplot/plugins/jqplot.canvasTextRenderer.js"></script>
+            <script type="text/javascript" src="./js/jplot/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+            <script type="text/javascript" src="./js/jplot/plugins/jqplot.canvasAxisTickRenderer.js"></script>
+            <script type="text/javascript" src="./js/jplot/plugins/jqplot.highlighter.js"></script>
+            
+            <link rel="stylesheet" type="text/css" href="./js/jplot/jquery.jqplot.css" />            
+            
+            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+        </h:head>
+        <h:body style="width:100%;text-align: center;margin:0 auto;">
+           <style type="text/css">
+                th{background-image:none !important;}
+           </style>
+           
+           <h:form>
+            <ui:include src="menu.jsf">
+                <ui:param name="opcion" value="ranking" />
+            </ui:include>
+                
+                <div id="contenido" align="center">
+                
+                <rich:popupPanel header="Historial" 
+                                 width="700" 
+                                 height="400" 
+                                 id="popupHistorial" 
+                                 modal="false" 
+                                 resizeable="false"
+                                 domElementAttachment="form" 
+                                 style="overflow:hidden;">
+                
+                    <f:facet name="header">
+                        <h:outputText value="Historial G.R.A.U." />
+                    </f:facet>
+                    <f:facet name="controls">
+                        <h:outputLink value="#" onclick="plot1.destroy(); #{rich:component('popupHistorial')}.hide(); return false;">
+                            X
+                        </h:outputLink>
+                    </f:facet>
+                    
+                    <rich:panel id="panelHistorial" >
+                        
+                        <h:outputText value="#{rankingBean.jugador.apellidoNombre}" style="font-size:16px;" />
+
+                        <div id="chartdiv" style="height:300px;width:630px; "></div>
+                        
+                        <script>
+                            var mostrar = '#{rankingBean.jugador != null? 'S':'N'}';
+                            if (mostrar == 'S')
+                            {                        
+                              var grafPoints = [];
+                              
+                              <ui:repeat value="#{rankingBean.historial}" var="his" varStatus="loop">
+                                  grafPoints.push([ '#{his.fechaFormateada}' , #{his.his_puntaje} ]); 
+                              </ui:repeat>
+                              var plot1 = $.jqplot ('chartdiv', [grafPoints],
+                                     {axes: {
+                                            xaxis: {
+                                                    renderer:$.jqplot.DateAxisRenderer,
+                                                    min:'#{rankingBean.fechaMinima}',
+                                                    max:'#{rankingBean.fechaMaxima}',
+                                                    tickOptions:{
+                                                        fontSize: '12px',
+                                                        formatString:'%b %Y'
+                                                    },
+                                                    tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                                                   },
+                                            yaxis: {
+                                                    min: #{rankingBean.minimo},
+                                                    tickOptions:{
+                                                        fontSize: '12px'
+                                                    },
+                                                    tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                                                   }
+                                            },
+                                      highlighter: {
+                                            show: true,
+                                            tooltipLocation: 'ne',
+                                            showMarker:false,
+                                            tooltipAxes: 'xy',
+                                            formatString:'&lt;table class="jqplot-highlighter" style="font-size:12px;"&gt;&lt;tr align="left"&gt;&lt;td&gt;Fecha:&lt;/td&gt;&lt;td&gt;%s&lt;/td&gt;&lt;/tr&gt;&lt;tr align="left"&gt;&lt;td&gt;GRAU:&lt;/td&gt;&lt;td&gt;%s&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;'
+                                            }
+                                     });
+                            }
+                        </script>
+                    
+                    </rich:panel>
+  
+                </rich:popupPanel>
+                
+                <table id="tablaprincipal">
+                    <tr>
+                        <td height="600" width="272" align="center" valign="top">
+                            <ui:include src="lateral.jsf"/>
+                        </td>
+                        <td width="747" style="padding-top:5px;padding-right:10px;" valign="top" align="center">
+                        
+                        <rich:panel header="Ranking G.R.A.U.">
+                        
+                        <h:panelGrid id="statusMessages" columns="1">
+                                <rich:messages  id="messages1" showDetail="true" 
+                                                styleClass="messages" 
+                                                globalOnly="false" />
+                        </h:panelGrid>                        
+                        
+                        <rich:tabPanel switchType="client" >
+                            <rich:tab header="Juegadores Activos" >
+                            
+                            <rich:dataTable id="tblRanking" rows="35" 
+                                            value="#{backing_ranking.listaRanking}" 
+                                            var="row" style="width:600px;">
+
+                                <f:facet name="header"> 
+                                    <rich:dataScroller fastControls="hide"  />
+                                </f:facet>
+
+
+                                <rich:column width="5" style="width:50px;text-align:center;background-color:#{row.backgroundColor}">
+                                    <f:facet name="header"><h:outputText value="Categoría" /></f:facet>
+                                    <h:outputText value="#{row.categoria}&#176;" />
+                                </rich:column>
+                                
+                                <rich:column width="300" style="width:300px;background-color:#{row.backgroundColor}"
+                                             sortBy="#{row.apellidoNombre}" sortOrder="#{rankingSortingBean.apellidoNombreOrder}">
+                                    <f:facet name="header">
+                                        <a4j:commandLink value="Apellido y Nombre" render="tblRanking" action="#{rankingSortingBean.sortByApellidoNombre}" />
+                                    </f:facet>
+                                    <h:outputText value="#{row.apellidoNombre}" style="font-weight:bold;"/>
+                                </rich:column>
+
+                                <rich:column width="50" style="width:50px;text-align:center;background-color:#{row.backgroundColor}"
+                                             sortBy="#{row.grauActual}" sortOrder="#{rankingSortingBean.grauOrder}">
+                                    <f:facet name="header">
+                                        <a4j:commandLink value="G.R.A.U." render="tblRanking" action="#{rankingSortingBean.sortByGrau}" />
+                                    </f:facet>
+                                    <h:outputText value="#{row.grauActual}"/>
+                                </rich:column>
+
+                                <rich:column style="width:50px;text-align:center;">
+                                    <f:facet name="header"><h:outputText value="Historial"/></f:facet>
+                                    
+                                    <a4j:commandLink immediate="false" styleClass="no-decor" execute="@this" 
+                                                     render="popupHistorial" 
+                                                     action="#{backing_ranking.verHistorial_action}" 
+                                                     oncomplete="#{rich:component('popupHistorial')}.show()">
+                                
+                                        <h:graphicImage id="imgVer" url="/imagenes/lupa2.png" height="16" width="16" style="margin-left:5px;" alt="Ver Historial"/>
+                                         
+                                        <f:setPropertyActionListener target="#{rankingBean.jugador}" value="#{row}"/>
+
+                                    </a4j:commandLink>
+                                </rich:column>
+
+                                <f:facet name="footer"> 
+                                    <rich:dataScroller fastControls="hide" />
+                                </f:facet>                                
+                                
+                            </rich:dataTable>
+                            </rich:tab>
+                            
+                            
+                            <rich:tab header="Documentos">
+                                <rich:panel style="height:500px;" >
+                                    <rich:dataTable id="tblGrauRanking" rows="15"
+                                                    value="#{backing_ranking.grauRanking}" 
+                                                    var="row" style="width:600px;">
+                                    
+                                        <f:facet name="header"> 
+                                            
+                                            <rich:columnGroup>
+                                                
+                                                <rich:column rowspan="2">
+                                                    <h:outputText value="Fecha" />
+                                                </rich:column>
+                                                <rich:column rowspan="2">
+                                                    <h:outputText value="Torneos" />
+                                                </rich:column>
+                                                <rich:column colspan="4">
+                                                    <h:outputText value="Documentos" />
+                                                </rich:column>                           
+                                                <rich:column breakRowBefore="true">
+                                                    <h:outputText value="Informe General por Torneo" />
+                                                </rich:column>
+                                                <rich:column>
+                                                    <h:outputText value="Variaciones Sumadas por Jugador" />
+                                                </rich:column>
+                                                <rich:column>
+                                                    <h:outputText value="Jugadores Activos" />
+                                                </rich:column>
+                                                <rich:column>
+                                                    <h:outputText value="Jugadores Nuevos" />
+                                                </rich:column>
+                                            </rich:columnGroup>
+                                            
+
+                                        </f:facet>
+                                        
+                                        <rich:column style="width:100px;text-align:center;" >
+                                            <h:outputText value="#{row.strFecha}"/>
+                                        </rich:column>
+                                        
+                                        <rich:column style="width:50px;text-align:right;" >
+                                            <h:outputText value="#{row.cantidadTorneos}" />
+                                        </rich:column>
+
+                                        <rich:column style="width:150px;text-align:center;">
+                                            <h:commandLink immediate="false" styleClass="no-decor" 
+                                                             action="#{backing_ranking.downloadFileAction}">
+                                                <h:graphicImage id="imgGrau1" url="/imagenes/adobe.png" 
+                                                                style="margin-left:5px;" alt="Informe General por Torneo"/>
+                                                 
+                                                <f:setPropertyActionListener target="#{rankingBean.pfdMostrar}" value="#{row.archivoGral}"/>
+                                            </h:commandLink>
+                                        </rich:column>
+                                        <rich:column style="width:150px;text-align:center;">
+                                            <h:commandLink immediate="false" styleClass="no-decor" 
+                                                           action="#{backing_ranking.downloadFileAction}">
+                                                <h:graphicImage id="imgGrau2" url="/imagenes/adobe.png" 
+                                                                style="margin-left:10px;" alt="Variaciones Sumadas por Jugador"/>
+                                                 
+                                                <f:setPropertyActionListener target="#{rankingBean.pfdMostrar}" value="#{row.archivoVariacionesSumadas}"/>
+                                            </h:commandLink>
+                                        </rich:column>
+                                        <rich:column style="width:150px;text-align:center;">
+                                            <h:commandLink immediate="false" styleClass="no-decor" 
+                                                           action="#{backing_ranking.downloadFileAction}">
+                                                <h:graphicImage id="imgGrau3" url="/imagenes/adobe.png" 
+                                                                style="margin-left:10px;" alt="Jugadores Activos"/>
+                                                 
+                                                <f:setPropertyActionListener target="#{rankingBean.pfdMostrar}" value="#{row.archivoActivos}"/>
+                                            </h:commandLink>
+                                        </rich:column>
+                                        <rich:column style="width:150px;text-align:center;">
+                                            <h:commandLink immediate="false" styleClass="no-decor" 
+                                                           action="#{backing_ranking.downloadFileAction}">
+                                                <h:graphicImage id="imgGrau4" url="/imagenes/adobe.png" 
+                                                                style="margin-left:10px;" alt="Jugadores Activos"/>
+                                                 
+                                                <f:setPropertyActionListener target="#{rankingBean.pfdMostrar}" value="#{row.archivoNuevos}"/>
+                                            </h:commandLink>
+                                        </rich:column>
+
+
+                                        <f:facet name="footer"> 
+                                            <rich:dataScroller fastControls="hide"  />
+                                        </f:facet>
+                                    </rich:dataTable>
+                                </rich:panel>
+                            </rich:tab>
+
+                            <rich:tab header="Reglamento">
+                                <rich:panel style="height:800px;">
+                                    <table bgcolor="#f1f1f1" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <object width="700" height="750" type="application/pdf" data="../imagenesLyF/reglamento_grau.pdf">
+                                                    <param name="src" value="../imagenesLyF/reglamento_grau.pdf" />
+                                                    <p>N o PDF available</p>
+                                                    </object>				
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                
+                                </rich:panel>
+                            </rich:tab>
+
+                        
+                        </rich:tabPanel>
+                        
+                        </rich:panel>
+                    </td>
+                </tr>
+            </table>
+            </div>
+           </h:form>
+        </h:body>
+    </html>
+</f:view>
