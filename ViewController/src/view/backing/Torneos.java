@@ -114,7 +114,10 @@ public class Torneos
         List<Torneo> lista = null;
         try
         {
-            lista = session.getServicio().qTorneos(null);
+            Map filtros = new HashMap();
+            filtros.put("estado", new Long(4)); // Finalizados
+                
+            lista = session.getServicio().qTorneos(filtros);
         }
         catch(Exception e)
         {

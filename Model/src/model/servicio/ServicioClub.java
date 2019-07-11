@@ -1042,7 +1042,7 @@ public class ServicioClub implements Serializable
 
         List<Torneo> ret = null;
         
-        // TODO Agregar filtros
+        Long estado = filtros.get("estado") != null? (Long)filtros.get("estado"): null;
         
         String strQ =   "SELECT t.*, \n" + 
                         "       p.par_valor as sistema,\n" + 
@@ -1053,8 +1053,12 @@ public class ServicioClub implements Serializable
                         "WHERE p.par_tipo = 'SISTEMAS'\n" + 
                         "  AND p2.par_tipo = 'TIPOS_TORNEO'\n" + 
                         "  AND t.tor_sistema = p.par_codigo\n" + 
-                        "  AND t.tor_tipo = p2.par_codigo\n" + 
-                        "ORDER BY tor_fecha_inicio DESC";
+                        "  AND t.tor_tipo = p2.par_codigo\n";
+
+        if (estado != null)
+            strQ += "  AND t.tor_estado = " + estado + "\n";
+
+        strQ += "ORDER BY tor_fecha_inicio DESC";
 
         try 
         {

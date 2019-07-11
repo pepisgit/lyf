@@ -8,8 +8,8 @@
         xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
         <h:head >
-            <title>Club de Ajedrez Luz y Fuerza</title>
-            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <title>Club Ajedrez Pensado</title>
+            <link href="./resources/css/style.css?123" rel="stylesheet" type="text/css" />
             <style type="text/css">
                 .post img {border: none; padding: 0px; background-color: transparent;}
                 .ct-black-square{background-color:rgb(163,117,94);}

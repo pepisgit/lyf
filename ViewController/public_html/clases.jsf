@@ -8,7 +8,7 @@
     <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
         <h:head >
             <title>Club de Ajedrez Luz y Fuerza</title>
-            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <link href="./resources/css/style.css?123" rel="stylesheet" type="text/css" />
             <style type="text/css">
                 #divTexto p
                 {

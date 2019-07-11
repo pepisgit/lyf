@@ -9,7 +9,7 @@ public class PageBean implements Serializable
     
     private String showFacebookComments;
 
-    private String direccionClub = "Rivadeo 1330, Córdoba";
+    private String direccionClub = "Maipú 267, Córdoba";
 
     public void setIdNoticia(Long idNoticia) {
         this.idNoticia = idNoticia;

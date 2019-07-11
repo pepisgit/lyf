@@ -7,8 +7,8 @@
         xmlns:a4j="http://richfaces.org/a4j">
     <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
         <h:head >
-            <title>Club de Ajedrez Luz y Fuerza</title>
-            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <title>Club Ajedrez Pensado</title>
+            <link href="./resources/css/style.css?123" rel="stylesheet" type="text/css" />
             <script>
             window.CKEDITOR_BASEPATH = '#{request.contextPath}/org.richfaces.resources/javax.faces.resource/org.richfaces.ckeditor/';
             </script>

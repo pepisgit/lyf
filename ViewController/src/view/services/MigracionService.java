@@ -44,7 +44,7 @@ public class MigracionService
             Long tipoResBlancas = null;
             Long tipoResNegras = null;
             Date fecha = null;
-            String lugar = "Club de Ajedrez Luz y Fuerza";
+            String lugar = "Club Ajedrez Pensado";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             
             

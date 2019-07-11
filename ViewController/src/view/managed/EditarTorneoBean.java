@@ -54,7 +54,7 @@ public class EditarTorneoBean
     {
         this.torneo = new Torneo();
         this.torneo.setTor_fecha_inicio(new Date());
-        this.torneo.setTor_organizador("Club de Ajedrez Luz y Fuerza");
+        this.torneo.setTor_organizador("Club Ajedrez Pensado");
         this.torneo.setTor_sistema(1L);
         this.torneo.setMaxRonId(0L);
         this.torneo.setTor_bn_ok("S");

@@ -77,6 +77,10 @@ public class Torneo
     private String tor_comentarios;
     @Column(name = "tor_bn_ok")
     private String tor_bn_ok;
+    @Column(name = "tor_chess_results_id")
+    private String tor_chess_results_id;
+    @Column(name = "tor_estado")
+    private Long tor_estado;
     
     @Transient
     private boolean torbnok;
@@ -369,4 +373,20 @@ public class Torneo
         return tor_categoria_ascenso;
     }
 
+
+    public void setTor_chess_results_id(String tor_chess_results_id) {
+        this.tor_chess_results_id = tor_chess_results_id;
+    }
+
+    public String getTor_chess_results_id() {
+        return tor_chess_results_id;
+    }
+
+    public void setTor_estado(Long tor_estado) {
+        this.tor_estado = tor_estado;
+    }
+
+    public Long getTor_estado() {
+        return tor_estado;
+    }
 }

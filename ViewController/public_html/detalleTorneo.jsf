@@ -7,8 +7,8 @@
         xmlns:a4j="http://richfaces.org/a4j">
     <html style="height:100%;width:100%; " xmlns="http://www.w3.org/1999/xhtml">
         <h:head >
-            <title>Club de Ajedrez Luz y Fuerza</title>
-            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <title>Club Ajedrez Pensado</title>
+            <link href="./resources/css/style.css?123" rel="stylesheet" type="text/css" />
         </h:head>
         <h:body style="width:100%;text-align: center;margin:0 auto;">
            <h:form>
@@ -73,6 +73,18 @@
                                                         <h:outputText styleClass="infoNorm" value="#{detalleTorneoBean.torneo.tor_rondas}" />
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td >
+                                                        <h:outputText value="Chess-Results:"  rendered="#{not empty detalleTorneoBean.torneo.tor_chess_results_id}"/>
+                                                    </td>
+                                                    <td>
+                                                        <h:outputLink value="http://chess-results.com/tnr#{detalleTorneoBean.torneo.tor_chess_results_id}.aspx?lan=2"
+                                                                      target="_blank"
+                                                                      rendered="#{not empty detalleTorneoBean.torneo.tor_chess_results_id}">
+                                                            <h:outputText value="http://chess-results.com/tnr#{detalleTorneoBean.torneo.tor_chess_results_id}.aspx?lan=2" />
+                                                        </h:outputLink>
+                                                    </td>
+                                                </tr>                                                
                                                 
                                                 <tr style="#{detalleTorneoBean.styleFilaClasificado}">
                                                     <td style="padding-top:5px">

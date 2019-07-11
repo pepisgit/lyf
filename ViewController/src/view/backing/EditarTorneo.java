@@ -80,6 +80,7 @@ public class EditarTorneo
         
         // Cargar Datos Generales
         this.editarTorneoBean.getTorneo().setTor_nombre(torneoCR.getNombreTorneo());
+        this.editarTorneoBean.getTorneo().setTor_chess_results_id(this.editarTorneoBean.getIdChessResults() != null? this.editarTorneoBean.getIdChessResults().toString(): null);
         
         // Cargar Jugadores modificados o cargados manualmente
         for (JugadorDTO j: torneoCR.getListaJugadores())

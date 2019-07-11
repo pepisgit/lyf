@@ -12,73 +12,6 @@
       }
     </style>
 
-    <!--script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script-->
-    
-    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
-            type="text/javascript" charset="utf-8"></script>
-    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
-            type="text/javascript" charset="utf-8"></script>
-    
-    <script type="text/javascript" >
-      function initMapa()
-      {
-        var platform = new H.service.Platform({
-            'app_id': 'zD7l0J9xw0v9MUkRvdMw',
-            'app_code': 'zFtlEyJYmOetUeYdqhu4-Q'
-        });
-        
-        // Obtain the default map types from the platform object:
-        var defaultLayers = platform.createDefaultLayers();
-        
-        // Instantiate (and display) a map object:
-        var map = new H.Map(
-          document.getElementById('map_canvas'),
-          defaultLayers.normal.map,
-          {
-            zoom: 16,
-            center: { lat: -31.401450, lng: -64.181501 }
-          });
-          
-        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-        
-        // Create the default UI components
-        var ui = H.ui.UI.createDefault(map, defaultLayers);          
-          
-          
-        // Create a marker icon from an image URL:
-        var icon = new H.map.Icon('imagenes/marker.png');
-        
-        // Create a marker using the previously instantiated icon:
-        var marker = new H.map.Marker({ lat: -31.401450, lng: -64.181501 }, { icon: icon });
-        
-        // Add the marker to the map:
-        map.addObject(marker);
-      }
-    </script>
-    
-    <!--
-    <script>
-      function initialize() {
-        var map_canvas = document.getElementById('map_canvas');
-        var map_options = {
-          center: new google.maps.LatLng(-31.401450, -64.181501),
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-                
-
-        var map = new google.maps.Map(map_canvas, map_options)
-        var myLatlng = new google.maps.LatLng(-31.401450, -64.181501);
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title:"Club de Ajedrez Luz y Fuerza"
-        }); 
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-    -->
-    
     <table cellpadding="0" cellspacing="5">
     <tr>
     <td>
@@ -126,7 +59,8 @@
                 <tr>
                     <td>
                         <div id="map_canvas">
-                        </div>
+                                <h:graphicImage url="/imagenes/mapa.png" height="210" width="270"/>
+                            </div>
                     </td>
                 </tr>
                 <tr>
@@ -152,7 +86,7 @@
                             <td><h:outputText value="Buscanos en Facebook"/></td>
                         </tr>
                         <tr>
-                            <td><a href="https://www.facebook.com/groups/171312706335911/" target="_blank">Grupo: Club de Ajedrez Luz y Fuerza</a></td>
+                            <td><a href="https://www.facebook.com/groups/171312706335911/" target="_blank">Grupo: Club Ajedrez Pensado</a></td>
                         </tr>
                         </table>
                     </td>

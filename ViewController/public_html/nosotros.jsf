@@ -7,8 +7,8 @@
         xmlns:a4j="http://richfaces.org/a4j">
     <html style="height:100%;width:100%;" xmlns="http://www.w3.org/1999/xhtml">
         <h:head >
-            <title>Club de Ajedrez Luz y Fuerza</title>
-            <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+            <title>Club Ajedrez Pensado</title>
+            <link href="./resources/css/style.css?123" rel="stylesheet" type="text/css" />
         </h:head>
         <h:body style="width:100%;text-align: center;margin:0 auto;">
            <h:form>
@@ -26,19 +26,19 @@
                         
                         <rich:panel header="Nosotros" >
                             <p align="justify"><strong>&iquest;Qui&eacute;nes somos?</strong></p>
-                  <p align="justify"><br/>Somos un grupo de un grupo de ajedrecistas que, ante la falta de una actividad oficial constante, a principios de 2007 decidimos generar un espacio para el jugador de ajedrez en C&oacute;rdoba. A partir de nuestra iniciativa, y con el apoyo de la Asociaci&oacute;n de Entidades de Ajedrez de la Ciudad de C&oacute;rdoba y del Sindicato de Luz y Fuerza, en enero del 2007 vio la luz el <strong>Club de Ajedrez Luz y Fuerza</strong>. Entidad a trav&eacute;s de la cual buscamos generar actividad oficial (tanto a nivel local como nacional) de calidad y sostenida en el tiempo que le permita al jugador de ajedrez - tanto federado como aficionado - desarrollar su actividad y progresar en la misma.
-                  </p>
+                            <p align="justify"><br/>Somos un grupo de un grupo de ajedrecistas que, ante la falta de una actividad oficial constante, a principios de 2007 decidimos generar un espacio para el jugador de ajedrez en C&oacute;rdoba. A partir de nuestra iniciativa, y con el apoyo de la Asociaci&oacute;n de Entidades de Ajedrez de la Ciudad de C&oacute;rdoba y del Sindicato de Luz y Fuerza, en enero del 2007 vio la luz el <strong>Club de Ajedrez Luz y Fuerza</strong>. Entidad a trav&eacute;s de la cual buscamos generar actividad oficial (tanto a nivel local como nacional) de calidad y sostenida en el tiempo que le permita al jugador de ajedrez - tanto federado como aficionado - desarrollar su actividad y progresar en la misma.</p>
+                            <p align="justify"><br/>En el a&ntilde;o 2019, al no poder contar m&aacute;s con los espacios de la sede central del sindicato, el Club decidió emprender una aventura que lo llevaría a su refundación, con sede propia y con el apoyo de todos sus socios, no socios y personas que colaboraron desinteresadamente para que el proyecto fuera posible. Desde ese momento, nuestro Club pas&oacute; a denominarse <b>Ajedrez Pensado</b> y poco a poco puso en marcha una gran variedad de actividades, que realiza de manera continua y sostenida, con proyecci&oacute;n hacia un futuro de crecimiento en cantidad y calidad de sus propuestas. </p>
                   <table align="center">
                   	<tr>
                     	<td align="center">
                         	<table>
                             	<tr>
-                                	<td id="imagen001">
-                                   	  <img src="imagenes/nosotros_archivos/foto01.jpg"/>
+                                	<td id="imagen005">
+                                   	  <img src="imagenes/nosotros_archivos/foto05.jpg"/>
                                     </td>
                                 </tr>
                                 <tr id="comentario001">
-                                	<td class="Estilo2" align="center">Amplio sal&oacute;n donde el Club desarrolla sus actividades.</td>
+                                	<td class="Estilo2" align="center">Nuestro sal&oacute;n, donde el Club desarrolla sus actividades.</td>
                                 </tr>
                             </table>
                         </td>
@@ -84,7 +84,7 @@
                   <p align="left"><strong>Nuestro sue&ntilde;o</strong></p>
                   
            
-                  <p><br/>Seguir construyendo desde el espacio del Sindicato de Luz y Fuerza la historia, el presente y el futuro del ajedrez Cordob&eacute;s.</p>
+                  <p><br/>Seguir construyendo desde el espacio del Club Ajedrez Pensado la historia, el presente y el futuro del ajedrez Cordob&eacute;s.</p>
                   <p>
                   </p>
                   <table align="center">
@@ -106,7 +106,7 @@
                     </table>
                         <p align="center">
                         <br/>
-                        <strong>Comisi&oacute;n Directiva del Club de Ajedrez Luz y Fuerza</strong>
+                        <strong>Comisi&oacute;n Directiva del Club Ajedrez Pensado</strong>
                         <br/>
                         <table width="483" border="1" align="center" cellspacing="0">
                           <tr>
@@ -127,10 +127,6 @@
                           </tr>
                           <tr>
                             <td>Tesorero</td>
-                            <td>Jos&eacute; Pellitteri</td>
-                          </tr>
-                          <tr>
-                            <td>Pro-Tesorero</td>
                             <td>Sonia Cristori</td>
                           </tr>
                           <tr>
@@ -145,7 +141,10 @@
                             <td>3&#186; Vocal</td>
                             <td>Jos&eacute; Ortiz</td>
                           </tr>
-                          
+                          <tr>
+                            <td>4&#186; Vocal</td>
+                            <td>Alejandro Moreno</td>
+                          </tr>                          
                         </table>
                         
                         </p>

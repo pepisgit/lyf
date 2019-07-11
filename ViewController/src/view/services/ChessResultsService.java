@@ -48,7 +48,7 @@ public class ChessResultsService
         // Elements tablaJugadores = doc.select("div.defaultDialog > table > tbody > tr:gt(0)");
         
         
-        Elements tablaJugadores = doc.select("div.defaultDialog > table > tbody > tr"); 
+        Elements tablaJugadores = doc.select("div.defaultDialog > table.CRs1 > tbody > tr"); 
         // Cambio: La fila cero me sirve para saber donde estan los datos porque no siempre hay la misma cantidad de columnas
         
         int idx_nombre = -1, idx_jid = -1, idx_fed = -1, idx_rkg = -1;
@@ -124,17 +124,25 @@ public class ChessResultsService
         else
             throw new Exception ("No se ha podido determinar el tipo de Torneo a partir de la estructura del html.");
         
-        Elements pHeader = null, tablaHeaderPartidas;
+        Elements pHeader = null, tablaHeaderPartidasCRNG1B, tablaHeaderPartidasCRG1B;
         
         if (tipoTorneo == 1)
         {
-            tablaHeaderPartidas = docRondas.select("div.defaultDialog > table > tbody > tr");
-            pHeader = tablaHeaderPartidas.get(1).getElementsByTag("td");
+            tablaHeaderPartidasCRG1B = docRondas.select("div.defaultDialog > table.CRs1 > tbody > tr.CRg1b");
+            tablaHeaderPartidasCRNG1B = docRondas.select("div.defaultDialog > table.CRs1 > tbody > tr.CRng1b");
+            
+            pHeader = tablaHeaderPartidasCRG1B.size() > 0 ?
+                tablaHeaderPartidasCRG1B.get(1).getElementsByTag("td"):
+                tablaHeaderPartidasCRNG1B.get(1).getElementsByTag("td");
         }
         else if (tipoTorneo == 2)
         {
-            tablaHeaderPartidas = docRondas.select("div.defaultDialog > table > tbody > tr");
-            pHeader = tablaHeaderPartidas.get(0).getElementsByTag("td");
+            tablaHeaderPartidasCRG1B = docRondas.select("div.defaultDialog > table.CRs1 > tbody > tr.CRg1b");
+            tablaHeaderPartidasCRNG1B = docRondas.select("div.defaultDialog > table.CRs1 > tbody > tr.CRng1b");
+            
+            pHeader = tablaHeaderPartidasCRG1B.size() > 0 ?
+                tablaHeaderPartidasCRG1B.get(0).getElementsByTag("td"):
+                tablaHeaderPartidasCRNG1B.get(0).getElementsByTag("td");
         }
         
         idx_blancas = -1; idx_negras = -1; idx_resultado = -1;
@@ -166,7 +174,7 @@ public class ChessResultsService
         
         if (tipoTorneo == 1) // Round Robin
         {
-            tablasRondas = docRondas.select("div.defaultDialog > table > tbody > tr");
+            tablasRondas = docRondas.select("div.defaultDialog > table.CRs1 > tbody > tr");
             
             for (int nRonda = 1; nRonda <= chkRondasRR.size(); nRonda++) // itera n rondas
             {
@@ -214,7 +222,7 @@ public class ChessResultsService
         }
         else if (tipoTorneo == 2) // Suizo
         {
-            tablasRondas = docRondas.select("div.defaultDialog > table");
+            tablasRondas = docRondas.select("div.defaultDialog > table.CRs1");
             Collections.reverse(tablasRondas);
             
             nroRonda = 1L;
